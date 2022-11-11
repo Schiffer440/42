@@ -10,11 +10,13 @@ int main(int ac, char **av)
         char *c;
         char *s;
         char *r;
+        int a;
 
         (void)ac;
         s = av[1];
         r = av[2];
         c = av[3];
+        a = r[0];
         printf("memset=""%p\n", memset(s, (ft_atoi(r) + 48), ft_atoi(c)));
         printf("and = %s\n", s);
         printf("ft_memset=""%p\n", ft_memset(s, (ft_atoi(r) + 48), ft_atoi(c)));
@@ -35,6 +37,13 @@ int main(int ac, char **av)
         printf("and = %s\n", s);
         printf("strlcat= %ld\n", strlcat(s, r, ft_atoi(c)));
         printf("and = %s\n", s);
-        printf("strncmp= %d\n", strncmp(s, r, atoi(c)));
-        printf("ft_strncmp= %d\n", ft_strncmp(s, r, ft_atoi(c)));
+        printf("strncmp= %d\n", strncmp("qwerty", "wqerty", 2));
+        printf("ft_strncmp= %d\n", ft_strncmp("qwerty", "wqerty", 2));
+        printf("memchr %p\n", memchr(s, a, ft_atoi(c)));
+        printf("and = %s\n", s);
+        printf("ft_memchr %p\n", ft_memchr(s, a, ft_atoi(c)));
+        printf("and = %s\n", s);
+        printf("memcmp= %d\n", memcmp("qwerty", "wqerty", 2));
+        printf("ft_memcmp= %d\n", ft_memcmp("qwerty", "wqerty", 2));
+
     }
