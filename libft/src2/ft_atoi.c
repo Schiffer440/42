@@ -24,14 +24,20 @@ int	ft_atoi(const char *str)
 		i++;
 	while (str[i] == '+' || str[i] == '-')
 	{
-		if (str[i] == '-')
+		if (str[i] == '-' && str[i + 1] >= '0' && str[i + 1] <= '9')
+		{
 			sign = -sign;
-		i++;
+			i++;
+		}
+		else if(str[i] == '+' && str[i + 1] >= '0' && str[i + 1] <= '9')
+			i++;
+		else
+			return(0);
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		nb = nb * 10 + (str[i] - 48);
 		i++;
 	}
-	return (nb * sign);
+	return(nb * sign);
 }

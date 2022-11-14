@@ -42,7 +42,8 @@ int main(int ac, char **av)
             printf("ft_tolower= %d\n", ft_tolower(c));
             printf("strchr= %s\n", strchr(str, 'z'));
             printf("ft_strchr= %s\n", ft_strchr(s, b));
-             printf("strrchr= %s\n", strrchr(s, b));
-              printf("ft_strrchr= %s\n", ft_strrchr(s, b));
+            printf("strrchr= %s\n", strrchr(s, b));
+            printf("ft_strrchr= %s\n", ft_strrchr(s, b));
+              
         }
     }

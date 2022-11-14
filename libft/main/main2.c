@@ -45,5 +45,11 @@ int main(int ac, char **av)
         printf("and = %s\n", s);
         printf("memcmp= %d\n", memcmp("qwerty", "wqerty", 2));
         printf("ft_memcmp= %d\n", ft_memcmp("qwerty", "wqerty", 2));
+        printf("strnstr= %s\n", strnstr("on etait jeune a l'epoque", "jeune", 14));
+        printf("ft_strnstr= %s\n", ft_strnstr("on etait jeune a l'epoque", "jeune", 14));
+        printf("ft_atoi= %d\n", ft_atoi("+442"));
+        printf("atoi= %d\n", atoi("+442"));
+        printf("strdup= %s\n", strdup("novole bianci"));
+        printf("ft_strdup= %s\n", ft_strdup("novole bianci"));
 
     }
