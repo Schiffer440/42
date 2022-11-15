@@ -14,12 +14,16 @@ SRC	= $(wildcard src/*.c src2/*.c) \
 		main/main.c
 SRC2 = $(wildcard src2/*.c) \
 		main/main2.c
+SRC2 = $(wildcard src2/*.c) \
+		main/main1.c
 
 CFLAGS	= -Wextra -Wall -Werror
 
 NAME	= TEST
 
 NAME1	= TEST1
+
+NAME2	= TEST2
 
 INC = -I inc/libft.h
 
@@ -30,6 +34,7 @@ go: $(OBJ) $(OBJ2) arch
 	clear
 	cc -o $(NAME)  $(OBJ) $(INC) $(CFLAGS) -lbsd -g3
 	cc -o $(NAME1)  $(OBJ2) $(INC) $(CFLAGS) -lbsd -g3
+	cc -o $(NAME2)  $(OBJ2) $(INC) $(CFLAGS) -lbsd -g3
 	
 arch:
 	ar -rcs libft.a $(OBJ)

@@ -52,5 +52,6 @@ int main(int ac, char **av)
         printf("strdup=%s\n", strdup("novole bianci"));
         printf("ft_strdup=%s\n", ft_strdup("novole bianci"));
         printf("ft_substr=%s\n", ft_substr("le renard bleu saute", -3, -3));
+        printf("ft_strjoin=%s\n", ft_strjoin("my earbuds", " are shit"));
 
     }
