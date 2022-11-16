@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef libft_h
-#define libft_h
+#ifndef LIBFT_H_
+#define LIBFT_H_
 
-#include <stddef.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int	ft_isalpha(char c);
 int ft_isdigit(int c);
@@ -40,5 +40,10 @@ char *ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strdup(char *src);
 char    *ft_substr(char const *s, unsigned int start, size_t len);
 char    *ft_strjoin(char const *s1, char const *s2);
+char    *ft_strtrim(char const *s1, char const *set);
+void	ft_putnbr_fd(int nb, int fd);
+void    ft_putstr_fd(char *s, int fd);
+void    ft_putchar_fd(char c, int fd);
+void    ft_putendl_fd(char *s, int fd);
 
 #endif
