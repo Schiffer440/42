@@ -10,12 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC	= $(wildcard ft_*.c/*.c) \
-		main/main.c
-SRC2	= $(wildcard ft_*.c/*.c) \
-		main/main2.c
-
-
+SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
+		ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
+		ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+		ft_putstr_fd.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
+		ft_strlen.c	ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
+		ft_tolower.c ft_toupper.c \
 
 CFLAGS	= -Wextra -Wall -Werror
 
@@ -23,30 +23,23 @@ NAME	= TEST
 
 NAME2	= TEST2
 
-INC = -I inc/libft.h
-
 OBJ = $(SRC:.c=.o)
-OBJ1 = $(SRC1:.c=.o)
-OBJ2 = $(SRC2:.c=.o)
 
-	
 so: $(OBJ)
 	gcc -nostartfiles -shared -o libft.so $(OBJ)
-
-go: $(OBJ) $(OBJ2) arch
-	clear
-	cc -o $(NAME)  $(OBJ) $(INC) $(CFLAGS) -lbsd
-	cc -o $(NAME2)  $(OBJ2) $(INC) $(CFLAGS) -lbsd
+	
+all: $(OBJ) $(OBJ2) arch
+	gcc $(CFLAGS) -o $(OBJ)
 	
 arch:
 	ar -rcs libft.a $(OBJ)
 clean:
 	rm -f $(OBJ)
+	rm -f $(OBJ2)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(NAME1)
 	rm -f $(NAME2)
-	clear
+	rm -f *.a
 
-re: fclean go
+re: fclean all

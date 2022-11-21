@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <bsd/string.h>
-#include "../inc/libft.h"
+#include "../libft.h"
 
 int main()
     {
-        char *str = "salut tout le monde";
+        char str [20]= "salut tout le monde";
 
             printf("isalpha=""%d\n", isalpha('c'));
             printf("ft_isalpha=""%d\n", ft_isalpha('c'));
@@ -20,10 +20,10 @@ int main()
             printf("ft_isprint=""%d\n", ft_isprint('c'));
             printf("strlen=""%ld\n", strlen(str));
             printf("ft_strlen=""%ld\n", ft_strlen(str));
-            ft_bzero(str, 3);
-            printf("ft_bzero= %s\n", str);
-            bzero(str, 3);
+            bzero(str, 2);
             printf("bzero= %s\n", str);
+            ft_bzero(str, 2);
+            printf("ft_bzero= %s\n", str);
             printf("toupper= %d\n", toupper('c'));
             printf("ft_toupper= %d\n", ft_toupper('c'));
             printf("tolower= %d\n", tolower('c'));
@@ -32,5 +32,6 @@ int main()
             printf("ft_strchr= %s\n", ft_strchr(str, 'b'));
             printf("strrchr= %s\n", strrchr(str, 'b'));
             printf("ft_strrchr= %s\n", ft_strrchr(str, 'b'));
+            printf("ft_itoa=%s\n", ft_itoa(-2147483647));
               
     }
