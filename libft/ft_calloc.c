@@ -9,7 +9,6 @@
 /*   Updated: 2022/11/14 14:54:43 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
 #include "libft.h"
 
 void *ft_calloc(size_t nmemb, size_t size)

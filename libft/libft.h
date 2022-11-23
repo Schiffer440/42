@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 int	ft_isalpha(char c);
 int ft_isdigit(int c);
@@ -47,5 +48,6 @@ void    ft_putchar_fd(char c, int fd);
 void    ft_putendl_fd(char *s, int fd);
 char    *ft_itoa(int n);
 char **ft_split(char const *s, char c);
+void *ft_calloc(size_t nmemb, size_t size);
 
 #endif

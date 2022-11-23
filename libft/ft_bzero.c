@@ -9,10 +9,11 @@
 /*   Updated: 2022/11/08 17:04:10 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-void ft_bzero(void *s, long unsigned int n)
+void ft_bzero(void *s, size_t n)
     {
-        long unsigned int   i;
+        size_t  i;
 
         i = 0;
         while(i < n)

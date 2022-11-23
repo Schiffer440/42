@@ -9,8 +9,9 @@
 /*   Updated: 2022/11/21 11:18:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
-#include <stdio.h>
+/*#include <stdlib.h>
+#include <stdio.h>*/
+#include "libft.h"
 
 static int wordcount(char *s, char c)
     {
@@ -84,9 +85,8 @@ char **ft_split(char const *s, char c)
                 count++;
             }
       return(tab);
-    }
-    
-int main(int ac, char **av) 
+    }  
+/*int main(int ac, char **av) 
 {
     (void)ac;
     int i;
@@ -99,4 +99,4 @@ int main(int ac, char **av)
         i++;
     }
   return (0);
-}
+}*/
