@@ -9,62 +9,94 @@
 /*   Updated: 2022/11/21 11:18:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
+#include <stdio.h>
+
 static int wordcount(char *s, char c)
     {
         int i;
         int count;
 
         i = 0;
-        while(s[i])
+        count = 0;
+        while(s[i] != '\0')
             {
-                if(s[i] == c)
+                if(s[i] == c && s[i])
                     i++;
                 else
                 {
                     while(s[i] != c && s[i])
                         i++;
-                    count++;
+                count++;
                 }
             }
         return(count);
     }
 
-char *filltab(char *s, char c)
+static char *filltab(char *s, char c)
     {
-        int start;
         int i;
-        char *str
+        int len;
+        char *str;
 
         i = 0;
-        while(s[i])
+        len = 0;
+        while(s[i] == c)
+          s++;
+        while(s[i] != c && s[i])
             {
-                if(s[i] == c)
-                    i++;
-                else
-                {
-                    while(s[i] != c && s[i])
-                        i++;
-                    start++;
-                }
+                i++;
+                len++;
             }
+        str = malloc(sizeof(char) * len + 1);
+          if(!str)
+            return(0);
+        i = 0;
+        while(i < len)
+            {
+                str[i] = s[i];
+                i++;
+            }
+    str[i] = '\0';
+    return(str);
     }
 
 char **ft_split(char const *s, char c)
     {
         int i;
         char **tab;
-        char *str;
         int count;
         int tabcount;
 
         i = 0;
-        tabcount = wordcount(str, c);
-        str = (char *)s;
-        tab = malloc(sizeof(char) * tabcount + 1);
+        count = 0;
+        tabcount = wordcount((char *)s, c);
+        tab = malloc(sizeof(char *) * tabcount + 1);
             if(!tab)
                 return(0);
-        while(count < wordcount(str, c))
+        while(count < tabcount && s[i])
             {
-                    tab[count] = filltab(str, c)
+                tab[count] = filltab((char *)s, c);
+                while(s[i] == c && s[i])
+                  s++;
+                while(s[i] != c && s[i])
+                    s++;
+                count++;
             }
+      return(tab);
     }
+    
+int main(int ac, char **av) 
+{
+    (void)ac;
+    int i;
+    char **tab = ft_split(av[1], av[2][0]);
+
+    i = 0;
+    while(tab[i])
+    {
+        printf("%s\n", tab[i]);
+        i++;
+    }
+  return (0);
+}
