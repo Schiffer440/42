@@ -9,7 +9,6 @@
 /*   Updated: 2022/11/09 12:06:19 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void *ft_memmove(void *dest, const void *src, size_t n)
@@ -22,17 +21,15 @@ void *ft_memmove(void *dest, const void *src, size_t n)
         	return(0);
         d = dest;
         s = src;
-        i = 0;
-	if(s < d)
+        i = -1;
+	if(d > s)
 		while(n != 0)
 		{
-
+			d[n - 1] = s[n - 1];
+			n--;
 		}
 	else
-		while(i < n)
-            {
-               d[i] = s[i];
-               i++;
-            }
+		while(++i < n)
+               		d[i] = s[i];
 return(dest);
 }

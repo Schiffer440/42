@@ -16,6 +16,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 	int i;
 	int len;
 
+	if(!s)
+		return;
 	len = ft_strlen(s);
 	i = 0;
 	while(i < len)

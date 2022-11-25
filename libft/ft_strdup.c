@@ -19,9 +19,6 @@ char	*ft_strdup(char *src)
 	if (a == 0)
 		return (0);
 	else
-	{
-		ft_strlcpy(a, src, ft_strlen(src));	
-	}
-	a[ft_strlen(a)] = '\0';
+		ft_strlcpy(a, src, ft_strlen(src) + 1);	
 	return(a);
 }

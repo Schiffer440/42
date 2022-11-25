@@ -69,6 +69,8 @@ char **ft_split(char const *s, char c)
         int count;
         int tabcount;
 
+	if(!s)
+		return(0);
         i = 0;
         count = 0;
         tabcount = wordcount((char *)s, c);
@@ -78,19 +80,19 @@ char **ft_split(char const *s, char c)
         while(count < tabcount && s[i])
             {
                 tab[count] = filltab((char *)s, c);
-                while(s[i] == c && s[i])
+                while(s[i] == c && *s)
                   s++;
-                while(s[i] != c && s[i])
+                while(s[i] != c && *s)
                     s++;
                 count++;
             }
-      return(tab);
+	tab[count] = 0;
+	return(tab);
     }  
-/*int main(int ac, char **av) 
+/*int main() 
 {
-    (void)ac;
     int i;
-    char **tab = ft_split(av[1], av[2][0]);
+    char **tab = ft_split("      split       this for   me  !       ", ' ');
 
     i = 0;
     while(tab[i])

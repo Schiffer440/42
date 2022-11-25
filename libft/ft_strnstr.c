@@ -9,7 +9,7 @@
 /*   Updated: 2022/11/14 11:42:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
+#include "libft.h"
 
 char    *ft_strnstr(const char *big, const char *little, size_t len)
     {
@@ -22,12 +22,11 @@ char    *ft_strnstr(const char *big, const char *little, size_t len)
             return((char *)big);
         while(i < len)
         {
-            while(little[j] == big[i + j])
+            while(little[j] == big[i + j] && i + j < len)
                 {
                     if(little[j + 1] == '\0')
                         return((char *)big + i);
-                    else
-                        j++;
+                j++;
                 }
         i++;
         }
