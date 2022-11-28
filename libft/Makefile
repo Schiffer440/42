@@ -16,23 +16,29 @@ SRC =	ft_calloc.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_putstr_fd.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
 		ft_strlen.c	ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
 		ft_tolower.c ft_toupper.c ft_split.c ft_atoi.c ft_strmapi.c \
-		ft_striteri.c \
+		ft_striteri.c
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstlast.c ft_lstsize.c
 
 CFLAGS	= -Wextra -Wall -Werror
 
 OBJ = $(SRC:.c=.o)
+OBJB = $(BONUS:.c=.o)
 
-so: $(OBJ) arch
-	gcc -nostartfiles -shared -o libft.so $(OBJ)
+so: $(OBJ) $(OBJB) arch
+	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJB)
 
 all: $(OBJ) arch
 	gcc -c $(CFLAGS) -o $(OBJ)
+
+bonus: $(OBJB) arch
+	gcc -c $(CFLAGS) -o $(OBJB)
 
 arch:
 	ar -rcs libft.a $(OBJ)
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(OBJB)
 
 fclean: clean
 	rm -f *.a

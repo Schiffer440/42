@@ -14,12 +14,12 @@
 size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
 	size_t	i;
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(src);
 	i = 0;
-	if(size == 0)
-		return(len);
+	if (size == 0)
+		return (len);
 	while (i < size - 1 && src[i])
 	{
 		dest[i] = src[i];

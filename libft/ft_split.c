@@ -13,82 +13,83 @@
 #include <stdio.h>*/
 #include "libft.h"
 
-static int wordcount(char *s, char c)
-    {
-        int i;
-        int count;
+static int	wordcount(char *s, char c)
+{
+	int	i;
+	int	count;
 
-        i = 0;
-        count = 0;
-        while(s[i] != '\0')
-            {
-                if(s[i] == c && s[i])
-                    i++;
-                else
-                {
-                    while(s[i] != c && s[i])
-                        i++;
-                count++;
-                }
-            }
-        return(count);
-    }
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c && s[i])
+			i++;
+		else
+		{
+			while (s[i] != c && s[i])
+				i++;
+		count++;
+		}
+	}
+	return (count);
+}
 
-static char *filltab(char *s, char c)
-    {
-        int i;
-        int len;
-        char *str;
+static char	*filltab(char *s, char c)
+{
+	int		i;
+	int		len;
+	char	*str;
 
-        i = 0;
-        len = 0;
-        while(s[i] == c)
-          s++;
-        while(s[i] != c && s[i])
-            {
-                i++;
-                len++;
-            }
-        str = malloc(sizeof(char) * len + 1);
-          if(!str)
-            return(0);
-        i = 0;
-        while(i < len)
-            {
-                str[i] = s[i];
-                i++;
-            }
-    str[i] = '\0';
-    return(str);
-    }
+	i = 0;
+	len = 0;
+	while (s[i] == c)
+		s++;
+	while (s[i] != c && s[i])
+	{
+		i++;
+		len++;
+	}
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
-char **ft_split(char const *s, char c)
-    {
-        int i;
-        char **tab;
-        int count;
-        int tabcount;
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	char	**tab;
+	int		count;
+	int		tabcount;
 
-	if(!s)
-		return(0);
-        i = 0;
-        count = 0;
-        tabcount = wordcount((char *)s, c);
-        tab = malloc(sizeof(char *) * tabcount + 1);
-            if(!tab)
-                return(0);
-        while(count < tabcount && s[i])
-            {
-                tab[count] = filltab((char *)s, c);
-                while(s[i] == c && *s)
-                  s++;
-                while(s[i] != c && *s)
-                    s++;
-                count++;
-            }
+	if (!s)
+		return (0);
+	i = 0;
+	count = 0;
+	tabcount = wordcount((char *)s, c);
+	tab = malloc(sizeof(char *) * tabcount + 1);
+	if (!tab)
+		return (0);
+	while (count < tabcount && s[i])
+	{
+		tab[count] = filltab((char *)s, c);
+		while (s[i] == c && *s)
+			s++;
+		while (s[i] != c && *s)
+			s++;
+	count++;
+	}
 	tab[count] = 0;
-	return(tab);
-    }  
+	return (tab);
+}
+
 /*int main() 
 {
     int i;

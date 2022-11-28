@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void *ft_memset(void *s, int c, size_t n)
-    {
-        long unsigned int   i;
+void	*ft_memset(void *s, int c, size_t n)
+{
+	long unsigned int	i;
 
-        i = 0;
-        while(i < n)
-        {
-            *((char *)s + i) = c;
-           i++;
-        }
-        return(s);
-    }
+	i = 0;
+	while (i < n)
+	{
+		*((char *)s + i) = c;
+		i++;
+	}
+	return (s);
+}

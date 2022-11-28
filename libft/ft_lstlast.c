@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 15:38:37 by adugain           #+#    #+#             */
-/*   Updated: 2022/11/08 15:38:39 by adugain          ###   ########.fr       */
+/*   Created: 2022/11/28 16:14:18 by adugain           #+#    #+#             */
+/*   Updated: 2022/11/28 16:14:19 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	ft_isprint(int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
+	if (!lst)
 		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return(lst);
 }

@@ -11,26 +11,26 @@
 /* ************************************************************************** */
 #include <string.h>
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
-    {
-        size_t	i;
-        int j;
-        unsigned char *a;
-        unsigned char *b;
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	size_t			i;
+	int				j;
+	unsigned char	*a;
+	unsigned char	*b;
 
-        a = (unsigned char *)s1;
-        b = (unsigned char *)s2;
-        j = 0;
-		i = 0;
-		while(i < n)
-        {
-			if(a[j] != b[j])
-                return(a[j] - b[j]);
-            else
-            {
-                i++;
-                j++;
-            }
-        }
-        return(0);
-    }
+	a = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	j = 0;
+	i = 0;
+	while (i < n)
+	{
+		if (a[j] != b[j])
+			return (a[j] - b[j]);
+		else
+		{
+			i++;
+			j++;
+		}
+	}
+	return (0);
+}

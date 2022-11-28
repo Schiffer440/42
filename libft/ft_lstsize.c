@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 15:38:37 by adugain           #+#    #+#             */
-/*   Updated: 2022/11/08 15:38:39 by adugain          ###   ########.fr       */
+/*   Created: 2022/11/28 16:03:04 by adugain           #+#    #+#             */
+/*   Updated: 2022/11/28 16:03:05 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	int	i;
+
+	i = 0;
+	if(!lst)
+		return(0);
+	while(lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return(i);
 }
