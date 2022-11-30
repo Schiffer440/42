@@ -6,9 +6,10 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:36:07 by adugain           #+#    #+#             */
-/*   Updated: 2022/11/28 16:36:07 by adugain          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:15:07 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
@@ -19,7 +20,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		return ;
 	if (!*lst)
 		*lst = new;
-	last = ft_lstlast(*lst);
-	new->next = last->next;
-	last->next = new;
+	else
+	{
+		last = ft_lstlast(*lst);
+		last->next = new;
+	}
 }

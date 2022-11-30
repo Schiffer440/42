@@ -97,8 +97,9 @@ int main()
 	b = ft_lstnew(s2);
 	c = ft_lstnew(s3);
 	d = ft_lstnew(s4);
-	ft_lstadd_front(&a, b);
-	ft_lstadd_front(&a, c);
+	ft_lstadd_back(&a, b);
+	ft_lstadd_back(&a, c);
+	ft_lstadd_front(&a, d);
 	printlist(a);
 	return(0);
 }
