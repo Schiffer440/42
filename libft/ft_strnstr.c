@@ -9,6 +9,7 @@
 /*   Updated: 2022/11/14 11:42:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
@@ -17,11 +18,11 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	j;
 
 	i = 0;
-	j = 0;
-	if ((little[j] == '\0'))
+	if ((little[0] == '\0'))
 		return ((char *)big);
-	while (i < len)
+	while (i < len && big[i])
 	{
+		j = 0;
 		while (little[j] == big[i + j] && i + j < len)
 		{
 			if (little[j + 1] == '\0')
@@ -32,3 +33,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (0);
 }
+
+/*#include <stdio.h>
+int main ()
+{
+	char *empty = (char *)"";
+	printf("%s\n", ft_strnstr("", "coucou", -1));
+}*/

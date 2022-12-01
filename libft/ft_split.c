@@ -9,8 +9,8 @@
 /*   Updated: 2022/11/21 11:18:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*#include <stdlib.h>
-#include <stdio.h>*/
+#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
 
 static int	wordcount(char *s, char c)
@@ -64,27 +64,28 @@ static char	*filltab(char *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
 	char	**tab;
 	int		count;
 	int		tabcount;
 
 	if (!s)
 		return (0);
-	i = 0;
 	count = 0;
 	tabcount = wordcount((char *)s, c);
-	tab = malloc(sizeof(char *) * tabcount + 1);
+	tab = malloc(sizeof(char *) * (tabcount + 1));
 	if (!tab)
 		return (0);
-	while (count < tabcount && s[i])
+	while (count < tabcount && *s)
 	{
-		tab[count] = filltab((char *)s, c);
-		while (s[i] == c && *s)
+		while (s[0] == c && *s)
 			s++;
-		while (s[i] != c && *s)
+		if (*s)
+		{
+			tab[count] = filltab((char *)s, c);
+			count++;
+		}
+		while (s[0] != c && *s)
 			s++;
-	count++;
 	}
 	tab[count] = 0;
 	return (tab);
@@ -93,7 +94,7 @@ char	**ft_split(char const *s, char c)
 /*int main() 
 {
     int i;
-    char **tab = ft_split("      split       this for   me  !       ", ' ');
+    char **tab = ft_split("  tripouille  42  ", ' ');
 
     i = 0;
     while(tab[i])

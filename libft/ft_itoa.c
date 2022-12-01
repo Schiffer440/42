@@ -36,11 +36,11 @@ char	*ft_itoa(int n)
 	if (!str)
 		return (0);
 	if (n == 0)
-		return ("0");
+		str[0] = '0';
 	if (n < 0)
 	{
 		str[0] = '-';
-		sign *= -sign;
+		sign = -sign;
 	}
 	str[count(n)] = '\0';
 	while (n)

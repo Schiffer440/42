@@ -25,9 +25,6 @@ CFLAGS	= -Wextra -Wall -Werror
 OBJ = $(SRC:.c=.o)
 OBJB = $(BONUS:.c=.o)
 
-so: $(OBJ) $(OBJB) arch
-	gcc -nostartfiles -shared -o libft.so $(OBJ) $(OBJB)
-
 all: $(OBJ) arch
 	gcc -c $(CFLAGS) -o $(OBJ)
 
@@ -35,7 +32,7 @@ bonus: $(OBJB) arch
 	gcc -c $(CFLAGS) -o $(OBJB)
 
 arch:
-	ar -rcs libft.a $(OBJ)
+	ar -rcs libft.a $(OBJ) $(OBJB)
 
 clean:
 	rm -f $(OBJ)

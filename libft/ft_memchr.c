@@ -15,21 +15,23 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t			i;
-	int				j;
-	const char		*s1;
+	unsigned char	*str;
 
 	i = 0;
-	j = 0;
-	s1 = s;
-	while (i < (n - 1))
-	{
-		if (s1[j] == c)
-			return ((char *)s + i);
-		else
-		{
-			i++;
-			j++;
-		}
-	}
-	return (0);
+	str = (unsigned char *)s;
+	while (n > i && str[i] != (unsigned char)c)
+		i++;
+	if (n == i)
+		return (0);
+	return ((void *)str + i);
 }
+
+/*#include <stdio.h>
+int main ()
+{
+	char s[] = {0, 1, 2 ,3 ,4 ,5};
+	printf("%s\n", s);
+	ft_memchr(s, 2 + 256, 3);
+	printf("%p\n", ft_memchr(s, 2 + 256, 3));
+	printf("%s\n", s);
+}*/
