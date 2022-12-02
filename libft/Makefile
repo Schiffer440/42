@@ -6,9 +6,11 @@
 #    By: adugain <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 11:45:28 by adugain           #+#    #+#              #
-#    Updated: 2022/11/30 17:04:01 by adugain          ###   ########.fr        #
+#    Updated: 2022/12/02 14:09:43 by adugain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME = libft.a
 
 SRC =	ft_calloc.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
@@ -24,16 +26,16 @@ CFLAGS	= -Wextra -Wall -Werror
 
 OBJ = $(SRC:.c=.o)
 OBJB = $(BONUS:.c=.o)
+	
+$(NAME): 
+	gcc $(CFLAGS) -c $(SRC) -I ../libft.h
+	ar -rcs $(NAME) $(OBJ)
+	
+all: $(NAME)
 
-all: $(OBJ) arch
-	gcc -c $(CFLAGS) -o $(OBJ)
-
-bonus: $(OBJB) arch
-	gcc -c $(CFLAGS) -o $(OBJB)
-
-arch:
-	ar -rcs libft.a $(OBJ) $(OBJB)
-
+bonus: 
+	gcc $(CFLAGS) -c $(BONUS) -I ../libft.h
+	ar -rcs $(NAME) $(OBJB)
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJB)
