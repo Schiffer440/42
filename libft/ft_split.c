@@ -6,22 +6,21 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:18:22 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/05 14:07:38 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/06 17:17:02 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-static void	ft_free(char **tab, int pos)
+static void	*free_split(char **tab, int pos)
 {
 	while (pos >= 0)
 	{
 		free(tab[pos]);
 		pos--;
 	}
-	free(tab);
-	return (0);
+	free (tab);
+	return (NULL);
 }
 
 static int	wordcount(char *s, char c)
@@ -45,7 +44,7 @@ static int	wordcount(char *s, char c)
 	return (count);
 }
 
-static char	*filltab(char *s, char c, int count, char **tab)
+static char	*filltab(char *s, char c, char **tab, int count)
 {
 	int		i;
 	int		len;
@@ -60,15 +59,15 @@ static char	*filltab(char *s, char c, int count, char **tab)
 		i++;
 		len++;
 	}
-	str = malloc(sizeof(char) * (len + 1));
+	str = malloc(sizeof(char) * len + 1);
 	if (!str)
+		return (free_split(tab, count));
+	i = 0;
+	while (i < len)
 	{
-		ft_free(tab, count);
-		return (0);
-	}
-	i = -1;
-	while (++i < len)
 		str[i] = s[i];
+		i++;
+	}
 	str[i] = '\0';
 	return (str);
 }
@@ -77,22 +76,22 @@ char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		count;
-	int		tabcount;
 
 	if (!s)
 		return (0);
 	count = 0;
-	tabcount = wordcount((char *)s, c);
-	tab = malloc(sizeof(char *) * (tabcount + 1));
+	tab = malloc(sizeof(char *) * (wordcount((char *)s, c) + 1));
 	if (!tab)
 		return (0);
-	while (count < tabcount && *s && filltab((char *)s, c, count, tab) != 0)
+	while (*s)
 	{
 		while (s[0] == c && *s)
 			s++;
 		if (*s)
 		{
-			tab[count] = filltab((char *)s, c, count, tab);
+			tab[count] = filltab((char *)s, c, tab, count);
+			if (tab[count] == 0)
+				return (0);
 			count++;
 		}
 		while (s[0] != c && *s)

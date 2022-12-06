@@ -26,7 +26,7 @@ CFLAGS	= -Wextra -Wall -Werror
 
 OBJ = $(SRC:.c=.o)
 OBJB = $(BONUS:.c=.o)
-	
+
 $(NAME): 
 	gcc $(CFLAGS) -c $(SRC) -I ../libft.h
 	ar -rcs $(NAME) $(OBJ)
