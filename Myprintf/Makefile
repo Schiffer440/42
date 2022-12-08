@@ -32,3 +32,5 @@ fclean: clean
 	rm -f *.a
 
 re: fclean all
+
+.PHONY: all clean fclean re
