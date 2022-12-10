@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:42:17 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/08 17:29:34 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/10 15:59:50 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,93 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
-char 	*check_return(char *str)
+void	read_and_stash(int fd, char *buf, char *stash)
+{
+	int	readed;
+	
+	stash = NULL;
+	readed = 1;
+	buf = malloc(sizeof(char *) * BUFFER_SIZE + 1);
+	if (!buf)
+		return ;
+	while (readed != -1)
+	{
+		
+		readed = read(fd, buf, BUFFER_SIZE);
+		stash = ft_strjoin(stash, buf);
+	}
+	free(buf);
+}
+
+void	write_line(char *line, char *stash)
 {
 	int	i;
-	char 	*n_str;
+	int	len;
 	
-	while (str[i])
+	i = 0;
+	len = 0;
+	while (stash[i])
 	{
-		if (str[i] == '\n')
+		if (stash[i] == '\n')
 		{
-			n_str = malloc(sizeof(char *) * i + 1);
+			i++;
+			len++;
+			break ;
+		}
+		i++;
+		len++;
+	}
+	line = malloc(sizeof(char *) * len + 1);
+	i = 0;
+	while (i < len)
+		line[i++] = stash[i++];
+	line[i] = '\0';
+}
+
+void	clean_stash(char *stash)
+{
+	int	i;
+
+	i = 0;
+	while (stash[i] != '\n')
+	{
+		if (stash[i] == '\n')
+		{
+			i++;
 			break ;
 		}
 		i++;
 	}
-	n_str[i + 1] = '\0';
-	return (n_str);
-
+	
 }
+
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char 	*stash;
 	char	*buf;
 	char	*line;
 	
-	while (read(fd, buf, BUFFER_SIZE) != 0)
-	{
-		read(fd, buf, BUFFER_SIZE);
-		if (read(fd, buf, BUFFER_SIZE) == -1)
-			return(NULL);
-		stash = ft_strjoin(stash, buf);
-	}
-	line = check_return(stash);
+	if (fd < 0 && BUFFER_SIZE <= 0)
+		return (NULL);
+	//1.read file and put his content into stash
+	read_and_stash(fd, buf, stash);
+	//2.isolate the line and write it
+	write_line(line, stash);
+	//3.return the written line and clean the stash
+	clean_stash(stash);
 	return (line);
 }
 
 int main ()
 {
-	printf("%s", get_next_line(1));
+	int fd;
+	
+	fd = open("qwerty.txt", O_RDONLY);
+	printf("%s", get_next_line(fd));
 	return (0);
 }
