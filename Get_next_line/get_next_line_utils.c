@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:40:50 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/12 14:33:14 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:38:06 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return(0);
 	while (s[i] != '\0')
 	{
 		i++;
@@ -51,19 +53,19 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	if (c == '\0')
-		return ((char *)s + ft_strlen(s));
-	while (s[i] != '\0')
+	if (!s)
+		return(NULL);
+	while (s[i])
 	{
 		if (s[i] == (unsigned char)c)
 			return ((char *)s + i);
 		else
 			i++;
 	}
-	return (0);
+	return (NULL);
 }

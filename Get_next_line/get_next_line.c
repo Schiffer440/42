@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:42:17 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/12 17:15:14 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/13 17:36:03 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,98 +17,107 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-char	*clean_buf(char *buf)
+char	*clean_stash(char *stash)
 {
 	int	i;
 	int	j;
-	char	*n_buf;
+	int	len;
+	char	*n_stash;
 
 	i = 0;
 	j = 0;
-	n_buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	while (buf[i] != '\n')
+	while (stash[i] != '\n' && stash[i])
 		i++;
-	while (j < i)
-	{
-		n_buf[j] = buf[j];
-		j++;
-	}
-	return (n_buf);
+	if (!stash[i])
+		return(free(stash), NULL);
+	len = ft_strlen(stash) - i;
+	n_stash = malloc(sizeof(char) * (len + 1));
+	if (!n_stash)
+		return(free(stash), NULL);
+	i++;
+	while (stash[i])
+		n_stash[j++] = stash[i++];
+	n_stash[j] = '\0';
+	free(stash);
+	return (n_stash);
 }
-char	*read_and_stash(int fd, char *buf, char *stash)
+char	*read_and_stash(int fd, char *stash)
 {
 	int	readed;
+	char	*buf;
 
 	readed = 1;
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return(NULL);
-	while (!ft_strchr(buf, '\n') && readed != 0)
+	while (!ft_strchr(stash, '\n') && readed != 0)
 	{
 		readed = read(fd, buf, BUFFER_SIZE);
-		buf[BUFFER_SIZE] = '\0';
-		printf("buf = %s\n", buf);
+		if (readed == -1)
+			return(free(buf), NULL);	
+		buf[readed] = '\0';
 		stash = ft_strjoin(stash, buf);
-		printf("stash = %s\n", stash);
 	}
-	buf = clean_buf(buf);
-	printf("new buf=%s\n", buf);
+	free(buf);
 	return (stash);
 }
 
-char	*write_line(char *line, char *stash)
+char	*write_line(char *stash)
 {
 	int	i;
-	int	j;
+	char	*line;
 
 	i = 0;
-	j = -1;
-	while (stash[i])
-	{
-		if (stash[i] == '\n')
-		{
-			i++;
-			break ;
-		}
+	if (!stash[i])
+		return(NULL);
+	while(stash[i] != '\n' && stash[i])
 		i++;
-	}
-	printf("stash = %s\n", stash);
-	line = malloc(sizeof(char) * (i + 1));
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (free(stash), NULL);
-	printf("Malloc line OK\n");
-	while (++j < i)
-		line[j] = stash[j];
-	line[j] = '\0';
-	free(stash);
+	i = 0;
+	while (stash[i] != '\n' && stash[i])
+	{
+		line[i] = stash[i];
+		i++;
+	}
+	if (stash[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	char 	*stash;
-	static char	*buf;
+	static char 	*stash;
 	char	*line;
 
-	if (fd < 0 && BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	//1.read file and put his content into stash
-	stash = read_and_stash(fd, buf, stash);
-	printf("stash 1.0 =%s\n", stash);
+	//1.read file and put its content into stash
+	stash = read_and_stash(fd, stash);
+	if (!stash)
+		return(NULL);
 	//2.isolate the line and write it
-	line = write_line(line, stash);
-	printf("stash 2.0 =%s\n", stash);
-	printf("line =%s\n", line);
+	line = write_line(stash);
 	//3.clean and create the new static
-	//clean_stash(stash);
+	stash = clean_stash(stash);
 	return (line);
 }
 
-int main ()
+/*int main ()
 {
-	int fd;
+	int	fd;
+	char	*str;
 	
+	str = "coucou";
 	fd = open("qwerty.txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	return (0);
-}
+}*/
