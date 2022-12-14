@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:42:17 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/14 14:30:10 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:34:45 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,31 +93,31 @@ char	*write_line(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char 	*stash;
+	static char 	*stash[FOPEN_MAX + 1];
 	char	*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);
 	//1.read file and put its content into stash
-	stash = read_and_stash(fd, stash);
-	if (!stash)
+	stash[fd] = read_and_stash(fd, stash[fd]);
+	if (!stash[fd])
 		return(NULL);
 	//2.isolate the line and write it
-	line = write_line(stash);
+	line = write_line(stash[fd]);
 	//3.clean and create the new static
-	stash = clean_stash(stash);
+	stash[fd] = clean_stash(stash[fd]);
 	return (line);
 }
 
-int main ()
+/*int main ()
 {
 	int	fd;
 	char	*str;
 	
 	str = "coucou";
-	fd = 1;// open("qwerty.txt", O_RDONLY);
+	fd = open("qwerty.txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	return (0);
-}
+}*/
