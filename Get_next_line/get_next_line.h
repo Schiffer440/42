@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 17:06:10 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/13 17:49:30 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:59:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 #  define BUFFER_SIZE 1
 # endif
 
-#include <string.h>
-#include <stdlib.h>
-
+# include <string.h>
+# include <stdlib.h>
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
