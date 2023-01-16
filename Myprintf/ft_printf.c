@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:06:49 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/06 18:10:25 by adugain          ###   ########.fr       */
+/*   Updated: 2022/12/19 13:25:09 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	len = 0;
+	if (!str)
+		return (0);
 	va_start(args, str);
 	while (str[i])
 	{
@@ -36,11 +38,10 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-/*int main()
+int main()
 {
-	char *str = NULL;
 	
-	printf("%d\n", ft_printf("%c", 'a'));
-	printf("%d\n", printf("%c", 'a'));
+	ft_printf();
+	printf(qwerty);
 	return(0);
-}*/
+}
