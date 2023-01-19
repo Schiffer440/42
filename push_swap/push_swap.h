@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:09:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/16 15:48:39 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/19 12:06:49 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdlib.h>
 
 typedef struct s_pile
 {
-	struct s_pile	*prec;
-	int	nb;
-	int	pos;
-	struct s_pile	*next;
+	int	size;
+	int	*stack;
 } t_pile;
 
 int	ft_atoi(const char *str);
