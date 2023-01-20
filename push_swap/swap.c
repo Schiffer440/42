@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:21:45 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/16 12:57:54 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:55:20 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	swap_a(int a0, int a1)
+#include "push_swap.h"
+void	sa(t_pile *piles)
 {
 	int save;
 	
-	save = a0;
-	a0 = a1;
-	a1 = save;
+	save = piles->stack_a[piles->size_a];
+	piles->stack_a[piles->size_a] = piles->stack_a[piles->size_a - 1];
+	piles->stack_a[piles->size_a - 1] = save;
 }
 
-void	swap_b(int b0, int b1)
+void	sb(t_pile *piles)
 {
 	int save;
 	
-	save = b0;
-	b0 = b1;
-	b1 = save;
+	save = piles->stack_b[piles->size_b];
+	piles->stack_b[piles->size_b] = piles->stack_a[piles->size_b - 1];
+	piles->stack_b[piles->size_b - 1] = save;
 }
 
-void	swap_swap(void)
+void	ss(void)
 {
 	swap_a;
 	swap_b;
