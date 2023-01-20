@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:18:19 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/20 14:01:11 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/20 18:06:12 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ void	print_pile(t_pile *piles)
 	int	i;
 
 	i = 0;
-	while(i <= piles->size_a)
-	{
-		ft_printf("%d\n", piles->stack_a[i]);
-		i++;
+	ft_printf("A | B \n");
+	while(i <= piles->size_a || i <= piles->size_b)
+	{	
+		if (piles->size_a >= 0)
+			ft_printf("%d | ", piles->stack_a[piles->size_a--]);
+		else
+			ft_printf(" | ");
+		if (piles->size_b >= 0)
+			ft_printf("%d\n", piles->stack_b[piles->size_b--]);
+		else
+			ft_printf("\n");	
 	}
 }
 
@@ -32,17 +39,17 @@ t_pile	*init_pile(int ac, char **av)
 	piles = NULL;
 	i = 0;
 	if (!(piles = malloc(sizeof(t_pile))))
-		return (free(l_pile), NULL);
+		return (free(piles), NULL);
 	ft_bzero(piles, sizeof(t_pile));
 	piles->size_a = ac - 2;
 	piles->size_b = -1;
 	if (!(piles->stack_a = malloc(sizeof(int) * ac)))
-		return (free(piles->stack_a), free(l_pile), NULL);
+		return (free(piles->stack_a), free(piles), NULL);
 	if (!(piles->stack_b = malloc(sizeof(int) * ac)))
-		return (free(piles->stack_b), free(piles->stack_a), free(l_pile), NULL);
+		return (free(piles->stack_b), free(piles->stack_a), free(piles), NULL);
 	while (--ac > 0)
 		piles->stack_a[i++] = ft_atoi(av[ac]);
-	return (l_pile);
+	return (piles);
 }
 int	main(int ac, char **av)
 {
@@ -53,6 +60,7 @@ int	main(int ac, char **av)
 			write(2, "error\n", 6);
 	}
 	piles = init_pile(ac, av);
+	rra(piles);
 	print_pile(piles);
 	return (0);
 }

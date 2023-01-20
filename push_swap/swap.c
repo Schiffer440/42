@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:21:45 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/20 13:55:20 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/20 18:03:11 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	sb(t_pile *piles)
 	piles->stack_b[piles->size_b - 1] = save;
 }
 
-void	ss(void)
+void	ss(t_pile *piles)
 {
-	swap_a;
-	swap_b;
+	sa(piles);
+	sb(piles);
 }
