@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap2.0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:18:19 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/20 18:06:12 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:31:35 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ t_pile	*init_pile(int ac, char **av)
 	ft_bzero(piles, sizeof(t_pile));
 	piles->size_a = ac - 2;
 	piles->size_b = -1;
-	if (!(piles->stack_a = malloc(sizeof(int) * ac)))
+	if (!(piles->stack_a = malloc(sizeof(int) * (ac - 1))))
 		return (free(piles->stack_a), free(piles), NULL);
-	if (!(piles->stack_b = malloc(sizeof(int) * ac)))
+	if (!(piles->stack_b = malloc(sizeof(int) * (ac - 1))))
 		return (free(piles->stack_b), free(piles->stack_a), free(piles), NULL);
 	while (--ac > 0)
 		piles->stack_a[i++] = ft_atoi(av[ac]);
 	return (piles);
 }
+
 int	main(int ac, char **av)
 {
 	t_pile	*piles;
@@ -60,7 +61,7 @@ int	main(int ac, char **av)
 			write(2, "error\n", 6);
 	}
 	piles = init_pile(ac, av);
-	rra(piles);
+	tri_5(piles);
 	print_pile(piles);
 	return (0);
 }

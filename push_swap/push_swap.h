@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:09:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/20 18:14:24 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/23 18:51:41 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define bool unsigned int
+# define true 1
+# define false 0
 
 # include <stdarg.h>
 # include <stdio.h>
@@ -43,6 +47,10 @@ void	rr(t_pile *piles);
 void	rra(t_pile *piles);
 void	rrb(t_pile *piles);
 void	rrr(t_pile *piles);
+void	tri_3(t_pile *piles);
+int	check_piles(t_pile *piles);
+void tri_5(t_pile *piles);
+int	*ft_index(t_pile *piles);
 
 
 #endif

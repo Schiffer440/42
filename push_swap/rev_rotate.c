@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 18:04:33 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/20 18:13:44 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/23 14:36:05 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	rra(t_pile *piles)
 		piles->stack_a[i] = piles->stack_a[i + 1];
 	}
 	piles->stack_a[piles->size_a] = save;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_pile *piles)
@@ -37,10 +38,12 @@ void	rrb(t_pile *piles)
 		piles->stack_b[i] = piles->stack_b[i + 1];
 	}
 	piles->stack_b[piles->size_a] = save;
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_pile *piles)
 {
 	rra(piles);
 	rrb(piles);
+	ft_printf("rrr\n");
 }
