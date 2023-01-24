@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:18:19 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/23 17:31:35 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/24 17:35:26 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 void	print_pile(t_pile *piles)
 {
 	int	i;
-
+	int	j;
+	int	k;
+	
+	k = piles->size_b;
+	j = piles->size_a;
 	i = 0;
 	ft_printf("A | B \n");
-	while(i <= piles->size_a || i <= piles->size_b)
+	while(i <= j || i <= k)
 	{	
-		if (piles->size_a >= 0)
-			ft_printf("%d | ", piles->stack_a[piles->size_a--]);
+		if (j >= 0)
+			ft_printf("%d | ", piles->stack_a[j--]);
 		else
 			ft_printf(" | ");
-		if (piles->size_b >= 0)
-			ft_printf("%d\n", piles->stack_b[piles->size_b--]);
+		if (k >= 0)
+			ft_printf("%d\n", piles->stack_b[k--]);
 		else
 			ft_printf("\n");	
 	}
@@ -61,7 +65,10 @@ int	main(int ac, char **av)
 			write(2, "error\n", 6);
 	}
 	piles = init_pile(ac, av);
-	tri_5(piles);
+	piles->stack_a = ft_index(piles);
+	print_pile(piles);
+	//tri_5(piles);
+	tri_100(piles);
 	print_pile(piles);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tri_simple.c                                       :+:      :+:    :+:   */
+/*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:44:29 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/23 18:53:47 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/24 18:29:39 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	*ft_index(t_pile *piles)
 			return (0);
 	while (i >= 0)
 	{
-		index = 1;
+		index = 0;
 		j = piles->size_a;
 		while (j >= 0)
 		{
@@ -50,9 +50,9 @@ int	check_piles(t_pile *piles)
 		if (piles->stack_a[i] > piles->stack_a[i + 1])
 			i++;
 		else
-			return (ft_printf("nope\n"), 0);
+			return (0);
 	}
-	return (ft_printf("yep\n"), 1);
+	return (1);
 }
 
 void	tri_3(t_pile *piles)
@@ -85,5 +85,26 @@ void	tri_3(t_pile *piles)
 
 void	tri_5(t_pile *piles)
 {
-	piles->stack_a = ft_index(piles);
+	pb(piles);
+	pb(piles);
+	if (check_piles(piles) == 0)
+		tri_3(piles);
+	if (piles->stack_b[piles->size_b] < piles->stack_b[piles->size_b - 1])
+		sb(piles);
+	while (piles->size_b != -1 || check_piles(piles) != 1)
+	{
+		if (piles->stack_a[0] < piles->stack_b[piles->size_b]
+			&& piles->size_a == 2)
+		{
+			pa(piles);
+			ra(piles);
+		}
+		else if (piles->stack_a[piles->size_a] > piles->stack_b[piles->size_b]
+			&& piles->size_b != -1)
+			pa(piles);
+		else if (piles->stack_a[piles->size_a] > piles->stack_a[piles->size_a - 1])
+			ra(piles);
+		else if (piles->stack_a[piles->size_a] < piles->stack_a[piles->size_a - 1])
+			rra(piles);
+	}
 }

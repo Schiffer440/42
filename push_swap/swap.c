@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:21:45 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/23 14:35:16 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/24 14:08:17 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sb(t_pile *piles)
 	int save;
 	
 	save = piles->stack_b[piles->size_b];
-	piles->stack_b[piles->size_b] = piles->stack_a[piles->size_b - 1];
+	piles->stack_b[piles->size_b] = piles->stack_b[piles->size_b - 1];
 	piles->stack_b[piles->size_b - 1] = save;
 	ft_printf("sb\n");
 }
