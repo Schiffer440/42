@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:18:19 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/24 17:35:26 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/26 17:25:47 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	main(int ac, char **av)
 	}
 	piles = init_pile(ac, av);
 	piles->stack_a = ft_index(piles);
-	print_pile(piles);
+	//print_pile(piles);
 	//tri_5(piles);
-	tri_100(piles);
-	print_pile(piles);
+	tri_500(piles);
+	//print_pile(piles);
 	return (0);
 }

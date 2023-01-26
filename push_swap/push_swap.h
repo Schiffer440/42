@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:09:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/24 17:13:37 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/26 17:23:24 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void tri_5(t_pile *piles);
 int	*ft_index(t_pile *piles);
 void	print_pile(t_pile *piles);
 void	tri_100(t_pile *piles);
-void	chunks(t_pile *piles);
+void	chunks(t_pile *piles, int i);
 void	move_pile(t_pile *piles, int i);
+void	sort_left(t_pile *piles, int i);
+void	tri_500(t_pile *piles);
 
 
 #endif

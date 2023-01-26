@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 18:04:33 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/23 14:36:05 by adugain          ###   ########.fr       */
+/*   Updated: 2023/01/26 16:07:35 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rrb(t_pile *piles)
 	{
 		piles->stack_b[i] = piles->stack_b[i + 1];
 	}
-	piles->stack_b[piles->size_a] = save;
+	piles->stack_b[piles->size_b] = save;
 	ft_printf("rrb\n");
 }
 
