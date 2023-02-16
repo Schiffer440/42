@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:18:19 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/08 16:59:38 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:07:23 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ t_pile	*init_pile(int ac, char **av)
 	if (!(p = malloc(sizeof(t_pile))))
 		return (free(p), NULL);
 	ft_bzero(p, sizeof(t_pile));
-	p->s_a = ac - 2;
-	p->s_b = -1;
+	p->s_a = ac - 1;
+	p->s_b = 0;
 	if (!(p->a = malloc(sizeof(int) * (ac - 1))))
 		return (free(p->a), free(p), NULL);
 	if (!(p->b = malloc(sizeof(int) * (ac - 1))))
 		return (free(p->b), free(p->a), free(p), NULL);
-	while (--ac > 0)
+	while (--ac >= 1)
 		p->a[i++] = ft_atoi(av[ac]);
 	return (p);
 }
@@ -69,6 +69,7 @@ int	main(int ac, char **av)
 	// print_pile(p);
 	//tri_5(p);
 	tri_100(p);
-	// print_pile(p);
+	// last_check(p);
+	print_pile(p);
 	return (0);
 }

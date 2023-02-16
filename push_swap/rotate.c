@@ -6,44 +6,44 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:58:15 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/23 14:35:43 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:11:57 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void	ra(t_pile *piles)
+void	ra(t_pile *p)
 {
 	int	save;
 	int	i;
 	
-	i = piles->size_a + 1;
-	save = piles->stack_a[piles->size_a];
+	i = p->s_a + 1;
+	save = p->a[p->s_a];
 	while (i >= 0)
 	{
-		piles->stack_a[i--] = piles->stack_a[i - 1];
+		p->a[i--] = p->a[i - 1];
 	}
-	piles->stack_a[0] = save;
+	p->a[0] = save;
 	ft_printf("ra\n");
 }
 
-void	rb(t_pile *piles)
+void	rb(t_pile *p)
 {
 	int	save;
 	int	i;
 	
-	i = piles->size_b + 1;
-	save = piles->stack_b[piles->size_b];
+	i = p->s_b + 1;
+	save = p->b[p->s_b];
 	while (i >= 0)
 	{
-		piles->stack_b[i--] = piles->stack_b[i - 1];
+		p->b[i--] = p->b[i - 1];
 	}
-	piles->stack_b[0] = save;
+	p->b[0] = save;
 	ft_printf("rb\n");
 }
 
-void	rr(t_pile *piles)
+void	rr(t_pile *p)
 {
-	ra(piles);
-	rb(piles);
+	ra(p);
+	rb(p);
 	ft_printf("rr\n");
 }

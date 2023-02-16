@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 12:58:07 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/16 15:11:57 by adugain          ###   ########.fr       */
+/*   Created: 2022/11/08 17:04:09 by adugain           #+#    #+#             */
+/*   Updated: 2023/01/20 12:58:54 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	pb(t_pile *p)
+void	ft_bzero(void *s, size_t n)
 {
-	p->b[++p->s_b] = p->a[p->s_a];
-	p->s_a -= 1;
-	ft_printf("pb\n");
-}
+	size_t	i;
 
-void	pa(t_pile *p)
-{
-	p->a[++p->s_a] = p->b[p->s_b];
-	p->s_b -= 1;
-	ft_printf("pa\n");
+	i = 0;
+	while (i < n)
+	{
+		*((char *)s + i) = '\0';
+		i++;
+	}
 }

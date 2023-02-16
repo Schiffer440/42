@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:09:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/26 17:23:24 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:11:57 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,37 @@
 
 typedef struct s_pile
 {
-	int	size_a;
-	int	*stack_a;
-	int	size_b;
-	int	*stack_b;
+	int	s_a;
+	int	*a;
+	int	s_b;
+	int	*b;
 } t_pile;
 
 int	ft_atoi(const char *str);
 int	ft_printf(const char *str, ...);
 int	format(char c, va_list args);
 void	ft_bzero(void *s, size_t n);
-void	pa(t_pile *piles);
-void	pb(t_pile *piles);
-void	sa(t_pile *piles);
-void	sb(t_pile *piles);
-void	ss(t_pile *piles);
-void	ra(t_pile *piles);
-void	rb(t_pile *piles);
-void	rr(t_pile *piles);
-void	rra(t_pile *piles);
-void	rrb(t_pile *piles);
-void	rrr(t_pile *piles);
-void	tri_3(t_pile *piles);
-int	check_piles(t_pile *piles);
-void tri_5(t_pile *piles);
-int	*ft_index(t_pile *piles);
-void	print_pile(t_pile *piles);
-void	tri_100(t_pile *piles);
-void	chunks(t_pile *piles, int i);
-void	move_pile(t_pile *piles, int i);
-void	sort_left(t_pile *piles, int i);
-void	tri_500(t_pile *piles);
+void	pa(t_pile *p);
+void	pb(t_pile *p);
+void	sa(t_pile *p);
+void	sb(t_pile *p);
+void	ss(t_pile *p);
+void	ra(t_pile *p);
+void	rb(t_pile *p);
+void	rr(t_pile *p);
+void	rra(t_pile *p);
+void	rrb(t_pile *p);
+void	rrr(t_pile *p);
+void	tri_3(t_pile *p);
+int	check_p(t_pile *p);
+void tri_5(t_pile *p);
+int	*ft_index(t_pile *p);
+void	print_pile(t_pile *p);
+void	tri_100(t_pile *p);
+void	chunks(t_pile *p, int i);
+void	move_pile(t_pile *p, int i);
+void	sort_left(t_pile *p, int i);
+void	tri_500(t_pile *p);
 
 
 #endif

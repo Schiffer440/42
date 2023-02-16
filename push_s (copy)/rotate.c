@@ -1,49 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rev_rotate.c                                       :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 18:04:33 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/16 15:11:57 by adugain          ###   ########.fr       */
+/*   Created: 2023/01/16 12:58:15 by adugain           #+#    #+#             */
+/*   Updated: 2023/02/08 16:59:38 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void	rra(t_pile *p)
+void	ra(t_pile *p)
 {
 	int	save;
 	int	i;
 	
-	i = -1;
-	save = p->a[0];
-	while (++i <= p->s_a)
+	i = p->s_a + 1;
+	save = p->a[p->s_a];
+	while (i >= 0)
 	{
-		p->a[i] = p->a[i + 1];
+		p->a[i--] = p->a[i - 1];
 	}
-	p->a[p->s_a] = save;
-	ft_printf("rra\n");
+	p->a[0] = save;
+	ft_printf("ra\n");
 }
 
-void	rrb(t_pile *p)
+void	rb(t_pile *p)
 {
 	int	save;
 	int	i;
 	
-	i = -1;
-	save = p->b[0];
-	while (++i <= p->s_b)
+	i = p->s_b + 1;
+	save = p->b[p->s_b];
+	while (i >= 0)
 	{
-		p->b[i] = p->b[i + 1];
+		p->b[i--] = p->b[i - 1];
 	}
-	p->b[p->s_b] = save;
-	ft_printf("rrb\n");
+	p->b[0] = save;
+	ft_printf("rb\n");
 }
 
-void	rrr(t_pile *p)
+void	rr(t_pile *p)
 {
-	rra(p);
-	rrb(p);
-	ft_printf("rrr\n");
+	ra(p);
+	rb(p);
+	ft_printf("rr\n");
 }

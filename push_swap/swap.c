@@ -6,34 +6,34 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:21:45 by adugain           #+#    #+#             */
-/*   Updated: 2023/01/24 14:08:17 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:11:57 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void	sa(t_pile *piles)
+void	sa(t_pile *p)
 {
 	int save;
 	
-	save = piles->stack_a[piles->size_a];
-	piles->stack_a[piles->size_a] = piles->stack_a[piles->size_a - 1];
-	piles->stack_a[piles->size_a - 1] = save;
+	save = p->a[p->s_a];
+	p->a[p->s_a] = p->a[p->s_a - 1];
+	p->a[p->s_a - 1] = save;
 	ft_printf("sa\n");
 }
 
-void	sb(t_pile *piles)
+void	sb(t_pile *p)
 {
 	int save;
 	
-	save = piles->stack_b[piles->size_b];
-	piles->stack_b[piles->size_b] = piles->stack_b[piles->size_b - 1];
-	piles->stack_b[piles->size_b - 1] = save;
+	save = p->b[p->s_b];
+	p->b[p->s_b] = p->b[p->s_b - 1];
+	p->b[p->s_b - 1] = save;
 	ft_printf("sb\n");
 }
 
-void	ss(t_pile *piles)
+void	ss(t_pile *p)
 {
-	sa(piles);
-	sb(piles);
+	sa(p);
+	sb(p);
 	ft_printf("ss\n");
 }

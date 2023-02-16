@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:44:29 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/08 16:59:38 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/16 15:00:13 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_p(t_pile *p)
 		if (p->a[i] > p->a[i + 1])
 			i++;
 		else
-			return (0);
+			return (i);
 	}
 	return (1);
 }
@@ -106,5 +106,20 @@ void	tri_5(t_pile *p)
 			ra(p);
 		else if (p->a[p->s_a] < p->a[p->s_a - 1])
 			rra(p);
+	}
+}
+
+void	last_check(t_pile *p)
+{
+	int	move;
+	
+	if (check_p(p) != 1)
+		move = check_p(p);
+	while (move-- >= 0)
+	{
+		if (move <= p->s_a / 2)
+			rra(p);
+		else
+			ra(p);
 	}
 }
