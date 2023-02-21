@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:08:08 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/20 14:22:26 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/21 13:47:26 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,29 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (nb * sign);
+}
+
+void	free_piles(t_pile **pile)
+{
+	t_pile	*tmp;
+
+	if (!pile || !*pile)
+		return ;
+	while (*pile)
+	{
+		tmp = (*pile)->next;
+		free(*pile);
+		*pile = tmp;
+	}
+}
+
+int	check_pile(t_pile *pile)
+{
+	while (pile->next != NULL)
+	{
+		if (pile->index > pile->next->index)
+			return (0);
+		pile = pile->next;
+	}
+	return (1);
 }

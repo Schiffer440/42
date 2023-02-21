@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:12:25 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/20 14:57:20 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/21 13:48:04 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_pile	*fill_pile(int ac, char **av)
 			pile_a = pile_new(nb);
 		else
 			add_pile_last(&pile_a, pile_new(nb));
+		i++;
 	}
 	return (pile_a);
 }
@@ -48,7 +49,7 @@ void	pile_index(t_pile *pile_a, int size_pile)
 		max = NULL;
 		while (tmp)
 		{
-			if (tmp->val == val && tmp->index == 0)
+			if (tmp->val == INT_MIN && tmp->index == 0)
 				tmp->index = 1;
 			if (tmp->val > val && tmp->index == 0)
 			{
@@ -62,5 +63,4 @@ void	pile_index(t_pile *pile_a, int size_pile)
 		if (max != NULL)
 			max->index = size_pile;
 	}
-	
 }

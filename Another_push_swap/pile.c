@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:29:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/20 14:28:03 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/21 09:49:48 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_pile	*pile_last(t_pile *pile)
 
 t_pile	*pile_before_last(t_pile *pile)
 {
-	while (pile && pile->next && pile->next->next)
+	while (pile && pile->next && pile->next->next != NULL)
 		pile = pile->next;
 	return (pile);
 }
