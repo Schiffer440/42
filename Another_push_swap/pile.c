@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:29:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 09:49:48 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:56:57 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_pile	*pile_new(int nb)
 		return (NULL);
 	new->val = nb;
 	new->index = 0;
-	new->pos = -1;
-	new->target_pos = -1;
+	new->pos = 0;
+	new->target_pos = 0;
 	new->cost_a = -1;
 	new->cost_b = -1;
 	new->next = NULL;

@@ -6,17 +6,18 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 09:41:48 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 15:01:49 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/22 16:39:37 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# define INT_MIN -2147483648
+# define INT_MAX 2147483647
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 # include <stdio.h>
 # include <stdarg.h>
 
@@ -41,7 +42,6 @@ int	strnb_comp(char *s1, char *s2);
 t_pile	*fill_pile(int ac, char **av);
 int	get_size(t_pile *pile);
 void	pile_index(t_pile *pile_a, int size_pile);
-void	push_swap(t_pile **pile_a, t_pile **pile_b, int size_pile);
 int	check_pile(t_pile *pile);
 int	ft_atoi(const char *str);
 t_pile	*pile_new(int nb);
@@ -58,7 +58,11 @@ void	rr(t_pile **pile_a, t_pile **pile_b);
 void	rra(t_pile **pile_a);
 void	rrb(t_pile **pile_b);
 void	rrr(t_pile **pile_a, t_pile **pile_b);
+void	pa(t_pile **pile_a, t_pile **pile_b);
+void	pb(t_pile **pile_a, t_pile **pile_b);
 void	small_sort(t_pile **pile);
+void	big_sort(t_pile **pile_a, t_pile **pile_b);
+void	get_target_pos(t_pile **pile_a, t_pile **pile_b);
 /*Printing only*/
 void	print_pile(t_pile *pile);
 

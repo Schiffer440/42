@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 10:44:24 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 16:39:14 by adugain          ###   ########.fr       */
+/*   Created: 2023/02/22 11:41:02 by adugain           #+#    #+#             */
+/*   Updated: 2023/02/22 12:14:09 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_pile(t_pile *pile)
+static void	push(t_pile **src, t_pile **dest)
 {
 	t_pile	*tmp;
 
-	while (pile)
-	{
-		tmp = pile->next;
-		ft_printf("val:%d | index:%d | pos:%d | target pos:%d\n", pile->val, pile->index, pile->pos, pile->target_pos);
-		pile = tmp;
-	}
+	tmp = (*src)->next;
+	(*src)->next = *dest;
+	*dest = *src;
+	*src = tmp;
+}
+
+void	pa(t_pile **pile_a, t_pile **pile_b)
+{
+	push(pile_b, pile_a);
+	ft_printf("pa\n");
+}
+
+void	pb(t_pile **pile_a, t_pile **pile_b)
+{
+	push(pile_a, pile_b);
+	ft_printf("pb\n");
 }

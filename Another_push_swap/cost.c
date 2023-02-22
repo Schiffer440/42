@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 10:44:24 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 16:39:14 by adugain          ###   ########.fr       */
+/*   Created: 2023/02/22 18:14:40 by adugain           #+#    #+#             */
+/*   Updated: 2023/02/22 19:02:27 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_pile(t_pile *pile)
+void	get_cost(t_pile **pile_a, t_pile **pile_b)
 {
-	t_pile	*tmp;
+	t_pile	*a;
+	t_pile	*b;
+	int	size_a;
+	int	size_b;
 
-	while (pile)
+	a = *pile_a;
+	b = *pile_b;
+	size_a = get_size(a);
+	size_b = get_size(b);
+	while (b)
 	{
-		tmp = pile->next;
-		ft_printf("val:%d | index:%d | pos:%d | target pos:%d\n", pile->val, pile->index, pile->pos, pile->target_pos);
-		pile = tmp;
+		b->cost_b = b->pos;
+		if (b->pos > size_b / 2)
+			b->cost_b = (size_b - b->pos) * -1;
+		b->cost_a = b->target_pos;
+		if (b->cost_a > size_a / 2)
+			b->cost_a = (size_a - b->target_pos) * -1;
+		b = b->next;
 	}
 }
