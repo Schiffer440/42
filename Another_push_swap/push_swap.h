@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 09:41:48 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 16:39:37 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:11:42 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ void	pb(t_pile **pile_a, t_pile **pile_b);
 void	small_sort(t_pile **pile);
 void	big_sort(t_pile **pile_a, t_pile **pile_b);
 void	get_target_pos(t_pile **pile_a, t_pile **pile_b);
+void	move_pile(t_pile **pile_a, t_pile **pile_b, int	cost_a, int cost_b);
+void	get_cost(t_pile **pile_a, t_pile **pile_b);
+void	cheapest_move(t_pile **pile_a, t_pile **pile_b);
+int	get_lowest_index(t_pile **pile);
 /*Printing only*/
 void	print_pile(t_pile *pile);
 

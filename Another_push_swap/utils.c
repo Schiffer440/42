@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:08:08 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 13:47:26 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:12:28 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ int	check_pile(t_pile *pile)
 		pile = pile->next;
 	}
 	return (1);
+}
+
+int	abs(int nb)
+{
+	if (nb < 0)
+		nb *= -1;
+	return (nb);
 }

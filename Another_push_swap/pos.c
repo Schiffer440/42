@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:23:51 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 17:57:34 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:50:52 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,49 +29,62 @@ static void	get_pos(t_pile **pile)
 
 static int	get_target(t_pile **pile_a, int	index_b, int target_index, int target_pos)
 {
-	t_pile	*tmp;
+	t_pile	*a;
 
-	tmp = *pile_a;
-	while(tmp)
+	a = *pile_a;
+	while(a)
 	{
-		if (tmp->index > index_b && tmp->index < target_index)
+		if (a->index > index_b && a->index < target_index)
 		{
-			target_pos = tmp->pos;
-			target_index = tmp->index;
+			target_pos = a->pos;
+			target_index = a->index;
 		}
-		tmp = tmp->next;
+		a = a->next;
 	}
 	if (target_index != INT_MAX)
 		return (target_pos);
-	tmp = *pile_a;
-	while (tmp)
+	a = *pile_a;
+	while (a)
 	{
-		if (tmp->index < index_b)
+		if (a->index < target_index)
 		{
-			target_pos = tmp->pos;
-			target_index = tmp->index;
+			target_pos = a->pos;
+			target_index = a->index;
 		}
-		tmp = tmp->next;
+		a = a->next;
 	}
 	return (target_pos);
 }
 
-void	get_target_pos(t_pile **pile_a, t_pile **pile_b)
+int	get_lowest_index(t_pile **pile)
 {
 	t_pile	*tmp;
+	int	lowest;
+	
+	tmp = *pile;
+	get_pos(pile);
+	while (tmp)
+	{
+		if (tmp->index == 1)
+			lowest = tmp->pos;
+		tmp = tmp->next;
+	}
+	return (lowest);
+}
+
+void	get_target_pos(t_pile **pile_a, t_pile **pile_b)
+{
+	t_pile	*b;
 	int	target_pos;
 	
-	tmp = *pile_b;
+	b = *pile_b;
 	get_pos(pile_a);
 	get_pos(pile_b);
 	target_pos = 0;
-	while (tmp)
+	while (b)
 	{
-		ft_printf("targeting...\n");
-		target_pos = get_target(pile_a, tmp->index, INT_MAX, target_pos);
-		ft_printf("target pos:%d\n", target_pos);
-		tmp->target_pos = target_pos;
-		tmp = tmp->next;
+		target_pos = get_target(pile_a, b->index, INT_MAX, target_pos);		
+		b->target_pos = target_pos;
+		b =b->next;
 	}
-	print_pile(*pile_b);
 }
