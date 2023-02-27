@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 10:39:37 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/23 16:37:13 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/27 10:11:37 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ static void	three_in_a(t_pile **pile_a, t_pile **pile_b)
 
 static void	right_rotate(t_pile **pile_a)
 {
-	t_pile *a;
 	int	lowest_index;
 	int	size_a;
 	
 	lowest_index = get_lowest_index(pile_a);
 	size_a = get_size(*pile_a);
-	a = *pile_a;
 	if (lowest_index < size_a / 2)
 	{
 		while (lowest_index < size_a)

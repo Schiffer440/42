@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 09:50:39 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/23 16:52:50 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/27 10:16:16 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(int ac, char **av)
 	int	size_pile;
 	
 	if (ac <= 1)
-		return (0);
+		return ((int)error());
 	if (is_valid_input(av) != 1)
-		return(0, ft_printf("wrong input\n"));
+		return((int)error());
 	pile_b = NULL;
 	pile_a = fill_pile(ac, av);
 	size_pile = get_size(pile_a);

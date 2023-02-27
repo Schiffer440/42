@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:12:25 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 13:48:04 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/27 10:12:07 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_pile	*fill_pile(int ac, char **av)
 {
 	t_pile	*pile_a;
 	int	i;
-	int	nb;
+	long int	nb;
 	
 	i = 1;
 	while (i < ac)
