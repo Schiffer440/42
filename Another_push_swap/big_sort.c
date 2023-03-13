@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   big_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 10:39:37 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/27 10:11:37 by adugain          ###   ########.fr       */
+/*   Updated: 2023/02/27 12:42:52 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	right_rotate(t_pile **pile_a)
 	
 	lowest_index = get_lowest_index(pile_a);
 	size_a = get_size(*pile_a);
-	if (lowest_index < size_a / 2)
+	if (lowest_index >= size_a / 2)
 	{
 		while (lowest_index < size_a)
 		{

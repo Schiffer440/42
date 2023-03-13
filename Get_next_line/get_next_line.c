@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:42:17 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/15 16:17:05 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:15:02 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*clean_stash(char *stash)
 		i++;
 	if (!stash[i])
 		return (free(stash), NULL);
-	len = ft_strlen(stash) - i;
+	len = ft_strlen_gnl(stash) - i;
 	n_stash = malloc(sizeof(char) * (len + 1));
 	if (!n_stash)
 		return (free(stash), NULL);
@@ -51,13 +51,13 @@ char	*read_and_stash(int fd, char *stash)
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
-	while (!ft_strchr(stash, '\n') && readed != 0)
+	while (!ft_strchr_gnl(stash, '\n') && readed != 0)
 	{
 		readed = read(fd, buf, BUFFER_SIZE);
 		if (readed == -1)
 			return (free(buf), NULL);
 		buf[readed] = '\0';
-		stash = ft_strjoin(stash, buf);
+		stash = ft_strjoin_gnl(stash, buf);
 	}
 	free(buf);
 	return (stash);
@@ -106,15 +106,15 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*int main ()
+int main ()
 {
 	int	fd;
 	char	*str;
 	
 	str = "coucou";
-	fd = 1;// open("qwerty.txt", O_RDONLY);
+	fd =open("/mnt/nfs/homes/adugain/Cursus 42/42/fdf/test_maps/10-2.fdf", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	return (0);
-}*/
+}

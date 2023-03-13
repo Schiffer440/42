@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:25:48 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/12 16:49:56 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/13 09:57:46 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <mlx.h>
-#include <X11/keysym.h>
-#include <X11/X.h>
-#include <stdio.h>
-
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 500
-#define MLX_ERROR 1
-
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void 	*win2_ptr;
-}	t_data;
+#include "fdf.h"
 
 void	draw_line(t_data *data)
 {
@@ -43,6 +28,7 @@ void	draw_line(t_data *data)
 		x++;
 	}
 }
+
 int	handle_no_event(void *data)
 {
 	return(0);
@@ -58,8 +44,6 @@ int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (keysym == XK_E)
-		mlx_destroy_window(data->mlx_ptr, data->win2_ptr);
 	if (keysym == XK_l)
 		draw_line(data);
 	return (0);
@@ -77,12 +61,6 @@ int main(void)
 	if (data.win_ptr == NULL)
 	{
 		free(data.win_ptr);
-		return (MLX_ERROR);
-	}
-	data.win2_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "the second");
-	if (data.win2_ptr == NULL)
-	{
-		free(data.win2_ptr);
 		return (MLX_ERROR);
 	}
 	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);

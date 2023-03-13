@@ -3,19 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:28:55 by adugain           #+#    #+#             */
-/*   Updated: 2022/11/30 17:03:51 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:46:05 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
+# endif
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <fcntl.h>
 
 int		ft_isalpha(char c);
 int		ft_isdigit(int c);
@@ -27,7 +33,7 @@ void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-size_t	ft_strlcpy(char *dest, char *src, size_t size);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
@@ -51,6 +57,10 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 int		ft_atoi(const char *str);
+char	*get_next_line(int fd);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+size_t	ft_strlen_gnl(const char *s);
+char	*ft_strchr_gnl(char *s, int c);
 typedef struct s_list
 {
 	void			*content;
@@ -65,5 +75,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int	format(char c, va_list args);
+int	ft_printf(const char *str, ...);
 
 #endif

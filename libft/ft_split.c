@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:18:22 by adugain           #+#    #+#             */
-/*   Updated: 2022/12/06 17:17:02 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/13 14:11:25 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,17 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 
-/*int main() 
-{
-    int i;
-    char **tab = ft_split("  tripouille  42  ", ' ');
+// #include <stdio.h>
+// int main() 
+// {
+//     int i;
+//     char **tab = ft_split("  tripouille  42  ", ' ');
 
-    i = 0;
-    while(tab[i])
-    {
-        printf("%s\n", tab[i]);
-        i++;
-    }
-  return (0);
-}*/
+//     i = 0;
+//     while(tab[i])
+//     {
+//         printf("%s\n", tab[i]);
+//         i++;
+//     }
+//   return (0);
+// }
