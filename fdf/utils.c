@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/14 17:45:39 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:10:09 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void    free_matrix(int **tab, t_matrix *matrix)
         i++;
     }
     free(tab);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 void	print_matrix(t_matrix *matrix)
@@ -73,6 +86,10 @@ void	fill_matrix(t_matrix *matrix, char *map)
 			matrix->tab[i][j] = ft_atoi((char *)data[j]);
 			j++;
 		}
+		free(line);
+		free_tab(data);
+		line = get_next_line(matrix->fd);
+		data = ft_split(line, ' ');
 		i++;
 	}
 }
@@ -116,6 +133,29 @@ void	create_matrix(t_matrix *matrix)
 	}
 }
 
+int	check_matrix(t_matrix *matrix)
+{
+	int	i;
+	int	j;
+	int	elem;
+	
+	i = 0;
+	j = 0;
+	elem = 0;
+	while (i < matrix->y)
+	{
+		while (matrix->tab[i])
+			j++;
+		while (matrix->tab[i - 1])
+			elem++;
+		if (i != 0 && j != elem)
+			return (0);
+		else
+			i++;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_matrix	matrix;
@@ -129,6 +169,8 @@ int	main(int ac, char **av)
 	create_matrix(&matrix);
 	fill_matrix(&matrix, av[1]);
 	print_matrix(&matrix);
+	if (check_matrix(&matrix) == 0)
+		return (free_matrix(matrix.tab, &matrix), 0);
 	free_matrix(matrix.tab, &matrix);
 	ft_printf("y:%d\nx:%d", matrix.y, matrix.x);
 }
