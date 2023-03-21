@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/15 13:10:09 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:08:35 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ void	fill_matrix(t_matrix *matrix, char *map)
 
 void	get_wrecked(char *str)
 {
-	if (str[strlen(str) - 1] == '\n')
+	if (str[strlen(str) - 1] == '\n' && str)
 		str[strlen(str) - 1] = '\0';
 	else
 		return ;
 }
 
-void	get_matrix_base(t_matrix *matrix, char *map)
+int	get_matrix_base(t_matrix *matrix, char *map)
 {
 	char	*line;
 	
@@ -110,14 +110,28 @@ void	get_matrix_base(t_matrix *matrix, char *map)
 	line = get_next_line(matrix->fd);
 	get_wrecked(line);
 	matrix->x = wordcount(line, ' ');
+	matrix->y += 1;
 	free(line);
-	while (line != NULL)
+	while (line)
 	{
 		line = get_next_line(matrix->fd);
-		free(line);
-		matrix->y++;
+		ft_printf("line:%s", line);
+		if (line != NULL)
+			get_wrecked(line);
+		if (line != NULL && matrix->x == wordcount(line, ' '))
+		{
+			ft_printf("line check:%d\nx:%d\n\n", wordcount(line, ' '), matrix->x);
+			free(line);
+			matrix->y++;
+		}
+		else
+		{
+			close(matrix->fd);
+			return(0);
+		}
 	}
 	close(matrix->fd);
+	return (1);
 }
 
 void	create_matrix(t_matrix *matrix)
@@ -128,32 +142,10 @@ void	create_matrix(t_matrix *matrix)
 	matrix->tab = malloc(sizeof(int*) * matrix->y);
 	while (i < matrix->y)
 	{
+		ft_printf("creating...\n");
 		matrix->tab[i] = malloc(sizeof(int) * matrix->x);
 		i++;
 	}
-}
-
-int	check_matrix(t_matrix *matrix)
-{
-	int	i;
-	int	j;
-	int	elem;
-	
-	i = 0;
-	j = 0;
-	elem = 0;
-	while (i < matrix->y)
-	{
-		while (matrix->tab[i])
-			j++;
-		while (matrix->tab[i - 1])
-			elem++;
-		if (i != 0 && j != elem)
-			return (0);
-		else
-			i++;
-	}
-	return (1);
 }
 
 int	main(int ac, char **av)
@@ -163,14 +155,15 @@ int	main(int ac, char **av)
 	matrix.x = 0;
 	matrix.y = 0;
 	if (ac == 2)
-		get_matrix_base(&matrix, av[1]);
+	{	
+		if (get_matrix_base(&matrix, av[1]) == 0)
+			return (0);
+	}
 	else
 		return(0);
 	create_matrix(&matrix);
 	fill_matrix(&matrix, av[1]);
 	print_matrix(&matrix);
-	if (check_matrix(&matrix) == 0)
-		return (free_matrix(matrix.tab, &matrix), 0);
 	free_matrix(matrix.tab, &matrix);
 	ft_printf("y:%d\nx:%d", matrix.y, matrix.x);
 }
