@@ -6,7 +6,7 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/20 16:08:35 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:05:06 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,33 @@
 typedef	struct s_matrix
 {
 	int	fd;
-	int	x;
-	int	y;
+	int	m_x;
+	int	m_y;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	int	**tab;
+	int	zoom;
 	
 }	t_matrix;
+
+typedef struct data
+{
+	float	x;
+	float	y;
+	int	z;
+	float	x1;
+	float	y1;
+	int	z1;
+	float	x_step;
+	float	y_step;
+}	data;
 
 void    free_matrix(int **tab, t_matrix *matrix)
 {
     int    i;
 
     i = 0;
-    while (i < matrix->y)
+    while (i < matrix->m_y)
     {
         free(tab[i]);
         i++;
@@ -54,10 +69,10 @@ void	print_matrix(t_matrix *matrix)
 	
 	i = 0;
 	j = 0;
-	while (i < matrix->y)
+	while (i < matrix->m_y)
 	{
 		j = 0;
-		while(j < matrix->x)
+		while(j < matrix->m_x)
 		{
 			ft_printf("%d", matrix->tab[i][j]);
 			j++;
@@ -78,10 +93,10 @@ void	fill_matrix(t_matrix *matrix, char *map)
 	matrix->fd = open(map, O_RDONLY);
 	line = get_next_line(matrix->fd);
 	data = ft_split(line, ' ');
-	while (i < matrix->y)
+	while (i < matrix->m_y)
 	{
 		j = 0;
-		while (j < matrix->x)
+		while (j < matrix->m_x)
 		{
 			matrix->tab[i][j] = ft_atoi((char *)data[j]);
 			j++;
@@ -109,8 +124,8 @@ int	get_matrix_base(t_matrix *matrix, char *map)
 	matrix->fd = open(map, O_RDONLY);
 	line = get_next_line(matrix->fd);
 	get_wrecked(line);
-	matrix->x = wordcount(line, ' ');
-	matrix->y += 1;
+	matrix->m_x = wordcount(line, ' ');
+	matrix->m_y += 1;
 	free(line);
 	while (line)
 	{
@@ -118,13 +133,13 @@ int	get_matrix_base(t_matrix *matrix, char *map)
 		ft_printf("line:%s", line);
 		if (line != NULL)
 			get_wrecked(line);
-		if (line != NULL && matrix->x == wordcount(line, ' '))
+		if (line != NULL && matrix->m_x == wordcount(line, ' '))
 		{
-			ft_printf("line check:%d\nx:%d\n\n", wordcount(line, ' '), matrix->x);
+			ft_printf("line check:%d\nm_x:%d\n\n", wordcount(line, ' '), matrix->m_x);
 			free(line);
-			matrix->y++;
+			matrix->m_y++;
 		}
-		else
+		else if ((line != NULL && matrix->m_x != wordcount(line, ' ')))
 		{
 			close(matrix->fd);
 			return(0);
@@ -139,31 +154,138 @@ void	create_matrix(t_matrix *matrix)
 	int	i;
 
 	i = 0;
-	matrix->tab = malloc(sizeof(int*) * matrix->y);
-	while (i < matrix->y)
+	matrix->tab = malloc(sizeof(int*) * matrix->m_y);
+	while (i < matrix->m_y)
 	{
 		ft_printf("creating...\n");
-		matrix->tab[i] = malloc(sizeof(int) * matrix->x);
+		matrix->tab[i] = malloc(sizeof(int) * matrix->m_x);
 		i++;
 	}
 }
 
-int	main(int ac, char **av)
+int	gen_matrix(char *map, t_matrix *matrix)
+{
+	matrix->m_x = 0;
+	matrix->m_y = 0;
+	
+	if (get_matrix_base(matrix, data) == 0)
+			return (0);
+	create_matrix(matrix);
+	fill_matrix(matrix, map);
+	print_matrix(matrix);
+	//free_matrix(matrix->tab, matrix);
+	return (1);
+	//ft_printf("m_y:%d\nm_x:%d", matrix.m_y, matrix.m_x);
+}
+
+int	handle_no_event(void *matrix)
+{
+	return(0);
+}
+
+int	handle_keyrelease(int keysym, t_matrix *matrix)
+{
+	printf("Keypress: %d\n", keysym);
+	return (0);
+}
+
+int	handle_keypress(int keysym, t_matrix *matrix)
+{
+	if (keysym == XK_Escape)
+	{	
+		mlx_destroy_window(matrix->mlx_ptr, matrix->win_ptr);
+		mlx_destroy_display(matrix->mlx_ptr);
+	}
+	/*if (keysym == XK_l)
+		draw_line(matrix);*/
+	return (0);
+}
+
+int	max_op(float a, float b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+float	abs_f(float nb)
+{
+	if (nb < 0)
+		nb *= -1;
+	return (nb);
+}
+
+int	color()
+{
+	
+}
+void	bresenham(float x, float y, float x1, float y1, t_matrix *matrix)
+{
+	float	x_step;
+	float	y_step;
+	int	max;
+	int	z;
+	int	z1;
+	
+	x *= matrix->zoom;
+	y *= matrix->zoom;
+	x1 *= matrix->zoom;
+	y1 *= matrix->zoom;
+	
+	x_step = x1 - x;
+	y_step = y1 - y;
+
+	max = max_op(abs_f(x_step), abs_f(y_step));
+	x_step /= max;
+	y_step /= max;
+	while((int)(x-x1) || (int)(y-y1))
+	{
+		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, x, y, 0xffffff);
+		x += x_step;
+		y += y_step;
+	}
+}
+
+void	map_display(t_matrix *matrix)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while(y < matrix->m_y)
+	{
+		x = 0;
+		while (x < matrix->m_x)
+		{
+			bresenham(x, y, x + 1, y, matrix);
+			bresenham(x, y, x, y + 1, matrix);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	main(int ac,char **av)
 {
 	t_matrix	matrix;
-	
-	matrix.x = 0;
-	matrix.y = 0;
 	if (ac == 2)
-	{	
-		if (get_matrix_base(&matrix, av[1]) == 0)
+	{
+		if (gen_matrix(av[1], &matrix) != 1)
 			return (0);
 	}
-	else
-		return(0);
-	create_matrix(&matrix);
-	fill_matrix(&matrix, av[1]);
-	print_matrix(&matrix);
+	else 
+		return (0);
+	matrix.zoom = 20;
+	matrix.mlx_ptr = mlx_init();
+	matrix.win_ptr = mlx_new_window(matrix.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
+	mlx_loop_hook(matrix.mlx_ptr, &handle_no_event, &matrix);
+	mlx_hook(matrix.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &matrix);
+	mlx_hook(matrix.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &matrix);
+	map_display(&matrix);
+	mlx_loop(matrix.mlx_ptr);
+	//mlx_destroy_window(matrix.mlx_ptr, matrix.win_ptr);
+	//mlx_destroy_display(matrix.mlx_ptr);
+	free(matrix.mlx_ptr);
 	free_matrix(matrix.tab, &matrix);
-	ft_printf("y:%d\nx:%d", matrix.y, matrix.x);
 }
