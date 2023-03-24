@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/23 11:52:18 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/24 14:35:48 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef	struct s_matrix
 
 typedef struct data
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 	int	z;
-	int	x1;
-	int	y1;
+	float	x1;
+	float	y1;
 	int	z1;
 	float	x_step;
 	float	y_step;
@@ -228,54 +228,61 @@ int	color(int x, int y, t_matrix *matrix)
 	else
 		return (0xffffff);
 }
-void	bresenham(float x, float y, float x1, float y1, t_matrix *matrix)
+
+void	bresenham(data data, t_matrix *matrix)
 {
 	float	x_step;
 	float	y_step;
 	int	max;
-	int	z;
 	int	z1;
 	
-	z = color(x, y, matrix);
-	x *= matrix->zoom;
-	y *= matrix->zoom;
-	x1 *= matrix->zoom;
-	y1 *= matrix->zoom;
+	data.z = color(data.x, data.y, matrix);
+	data.x *= matrix->zoom;
+	data.y *= matrix->zoom;
+	data.x1 *= matrix->zoom;
+	data.y1 *= matrix->zoom;
 	
-	x_step = x1 - x;
-	y_step = y1 - y;
+	x_step = data.x1 - data.x;
+	y_step = data.y1 - data.y;
 	max = max_op(abs_f(x_step), abs_f(y_step));
 	x_step /= max;
 	y_step /= max;
-	while((int)(x-x1) || (int)(y-y1))
+	while((int)(data.x - data.x1) || (int)(data.y - data.y1))
 	{
-		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, x, y, z);
-		x += x_step;
-		y += y_step;
+		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, data.x, data.y, data.z);
+		data.x += x_step;
+		data.y += y_step;
 	}
 }
 
 void	map_display(t_matrix *matrix)
 {
-	int	x;
-	int	y;
+	data data;
 
-	y = 0;
-	while(y < matrix->m_y)
+	data.y = 0;
+	data.y1 = 0;
+	while(data.y < matrix->m_y)
 	{
-		x = 0;
-		while (x <= matrix->m_x)
+		data.x = 0;
+		data.x1 = 0;
+		while (data.x <= matrix->m_x)
 		{
-			if (x < matrix->m_x)
+			if (data.x < matrix->m_x)
 			{
-				bresenham(x, y, x + 1, y, matrix);
+				data.x1 = data.x + 1;
+				data.y1 = data.y;
+				bresenham(data, matrix);
 			}
 				
-			if (y < matrix->m_y - 1)
-				bresenham(x, y, x, y + 1, matrix);
-			x++;
+			if (data.y < matrix->m_y - 1)
+			{
+				data.x1 = data.x;
+				data.y1 = data.y + 1;
+				bresenham(data, matrix);
+			}
+			data.x += 1;
 		}
-		y++;
+		data.y += 1;
 	}
 }
 
