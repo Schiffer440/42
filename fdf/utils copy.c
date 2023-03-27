@@ -6,11 +6,12 @@
 /*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/24 14:35:48 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/27 16:12:13 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 
 typedef	struct s_matrix
 {
@@ -26,12 +27,13 @@ typedef	struct s_matrix
 
 typedef struct data
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 	int	z;
-	float	x1;
-	float	y1;
+	int	x1;
+	int	y1;
 	int	z1;
+	int	color;
 	float	x_step;
 	float	y_step;
 }	data;
@@ -222,36 +224,58 @@ int	color(int x, int y, t_matrix *matrix)
 	int	z1;
 
 	z = matrix->tab[y][x];
-	ft_printf("z:%d\n", z);
 	if (z != 0)
 		return (0xe80c0c);
 	else
 		return (0xffffff);
 }
 
+void	ft_iso(float x, float y, int z)
+{
+	x = (x - y) * cos(0.8);
+	y = (x + y) * sin(0.8) - z;
+}
+
 void	bresenham(data data, t_matrix *matrix)
 {
+	float	x;
+	float	y;
+	float	x1;
+	float	y1;
 	float	x_step;
 	float	y_step;
 	int	max;
-	int	z1;
 	
-	data.z = color(data.x, data.y, matrix);
-	data.x *= matrix->zoom;
-	data.y *= matrix->zoom;
-	data.x1 *= matrix->zoom;
-	data.y1 *= matrix->zoom;
+	x = data.x;
+	y = data.y;
+	x1 = data.x1;
+	y1 = data.y1;
+	data.color = color(data.x, data.y, matrix);
+	data.z = matrix->tab[(int)data.y][(int)data.x];
+	ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
+	data.z1 = matrix->tab[(int)data.y1][(int)data.x1];
+	x *= matrix->zoom;
+	y *= matrix->zoom;
+	x1 *= matrix->zoom;
+	y1 *= matrix->zoom;
 	
-	x_step = data.x1 - data.x;
-	y_step = data.y1 - data.y;
+	x_step = x1 - x;
+	y_step = y1 - y;
+	//ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
+	//ft_iso(x, y, data.z);
+	//ft_iso(x1, y1, data.z1);
+	x += 150;
+	y += 150;
+	x1 += 150;
+	y1 += 150;
 	max = max_op(abs_f(x_step), abs_f(y_step));
 	x_step /= max;
 	y_step /= max;
-	while((int)(data.x - data.x1) || (int)(data.y - data.y1))
+	while((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, data.x, data.y, data.z);
-		data.x += x_step;
-		data.y += y_step;
+		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, x, y, data.color);
+		x += x_step; 
+		y += y_step;
 	}
 }
 
@@ -260,13 +284,12 @@ void	map_display(t_matrix *matrix)
 	data data;
 
 	data.y = 0;
-	data.y1 = 0;
-	while(data.y < matrix->m_y)
+	while((int)data.y < matrix->m_y)
 	{
 		data.x = 0;
-		data.x1 = 0;
 		while (data.x <= matrix->m_x)
 		{
+			//ft_printf("x->%d\n", data.x);
 			if (data.x < matrix->m_x)
 			{
 				data.x1 = data.x + 1;
