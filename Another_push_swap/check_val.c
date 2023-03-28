@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_val.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 09:54:39 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/20 14:26:51 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 15:31:35 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	number_check(char *av)
 {
 	int	i;
-	
+
 	i = 0;
 	if (is_sign(av[i]) && av[i + 1] != '\0')
 		i++;
@@ -32,7 +32,7 @@ static int	duplicate_check(char **av)
 	int	j;
 
 	i = 0;
-	while(av[i])
+	while (av[i])
 	{
 		j = 0;
 		while (av[j])
@@ -53,12 +53,21 @@ static int	check_zero(char *av)
 	i = 0;
 	if (is_sign(av[i]))
 		i++;
-	while(av[i])
+	while (av[i])
 	{
 		if (av[i] != '0')
 			return (0);
 		i++;
 	}
+	return (1);
+}
+
+static int	is_valid_int(char *av)
+{
+	long int	a = (2 << 32) - 1;
+	ft_printf("bit = %ld\n", a);
+	if (atol(av) < INT_MIN || atol(av) > INT_MAX)
+		return (0);
 	return (1);
 }
 
@@ -72,6 +81,8 @@ int	is_valid_input(char **av)
 	while (av[i])
 	{
 		if (!number_check(av[i]))
+			return (0);
+		if (is_valid_int(av[i])!= 1)
 			return (0);
 		zeros = check_zero(av[i]);
 		i++;

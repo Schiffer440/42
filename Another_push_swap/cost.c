@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cost.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:14:40 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/23 14:30:00 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:48:09 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	get_cost(t_pile **pile_a, t_pile **pile_b)
 {
 	t_pile	*a;
 	t_pile	*b;
-	int	size_a;
-	int	size_b;
+	int		size_a;
+	int		size_b;
 
 	a = *pile_a;
 	b = *pile_b;
@@ -37,10 +37,10 @@ void	get_cost(t_pile **pile_a, t_pile **pile_b)
 
 void	cheapest_move(t_pile **pile_a, t_pile **pile_b)
 {
-	t_pile *tmp;
-	int	cost_a;
-	int	cost_b;
-	int	cheapest;
+	t_pile	*tmp;
+	int		cost_a;
+	int		cost_b;
+	int		cheapest;
 
 	cheapest = INT_MAX;
 	tmp = *pile_b;

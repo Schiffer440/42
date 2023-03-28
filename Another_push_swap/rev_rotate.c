@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rev_rev_rotate.c                                       :+:      :+:    :+:   */
+/*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 11:02:17 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 11:14:50 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:55:14 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	rev_rotate(t_pile **pile)
 	t_pile	*tmp;
 	t_pile	*last;
 	t_pile	*before_last;
-	
+
 	before_last = pile_before_last(*pile);
 	last = pile_last(*pile);
 	tmp = *pile;

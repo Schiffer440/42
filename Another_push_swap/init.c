@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:12:25 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/27 10:12:07 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:46:53 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 t_pile	*fill_pile(int ac, char **av)
 {
-	t_pile	*pile_a;
-	int	i;
+	t_pile		*pile_a;
+	int			i;
 	long int	nb;
-	
+
 	i = 1;
 	while (i < ac)
 	{
@@ -38,10 +38,10 @@ t_pile	*fill_pile(int ac, char **av)
 
 void	pile_index(t_pile *pile_a, int size_pile)
 {
-	t_pile *tmp;
+	t_pile	*tmp;
 	t_pile	*max;
-	int	val;
-	
+	int		val;
+
 	while (--size_pile > 0)
 	{
 		tmp = pile_a;

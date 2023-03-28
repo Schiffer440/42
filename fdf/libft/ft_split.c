@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:18:22 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/14 13:26:04 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:50:46 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,20 @@ int	wordcount(char *s, char c)
 
 	i = 0;
 	count = 0;
-	while (s[i] != '\0' || s[i] != '\n')
+	while (s[i] || s[i] != '\n')
 	{
 		if (s[i] == c && s[i])
 			i++;
 		else
 		{
-			while (s[i] != c && s[i])
+			while (s[i] != c && s[i] && s[i] != '\n')
+			{
 				i++;
+			}
 		count++;
 		}
+		if (i + 1 == (int)ft_strlen(s))
+			break ;
 	}
 	return (count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/23 11:52:18 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 11:22:25 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,8 @@ int	color(int x, int y, t_matrix *matrix)
 	else
 		return (0xffffff);
 }
-void	bresenham(float x, float y, float x1, float y1, t_matrix *matrix)
+
+void	bresenham(float x, float y, float x1, float y1, t_matrix *matrix, int i)
 {
 	float	x_step;
 	float	y_step;
@@ -238,9 +239,13 @@ void	bresenham(float x, float y, float x1, float y1, t_matrix *matrix)
 	
 	z = color(x, y, matrix);
 	x *= matrix->zoom;
-	y *= matrix->zoom;
+	y *= 20;
 	x1 *= matrix->zoom;
-	y1 *= matrix->zoom;
+	y1 *= 20;
+	x += i + 1;
+	y += i + 1;
+	x1 += i + 1;
+	y1 += i + 1;
 	
 	x_step = x1 - x;
 	y_step = y1 - y;
@@ -259,8 +264,10 @@ void	map_display(t_matrix *matrix)
 {
 	int	x;
 	int	y;
+	int	i;
 
 	y = 0;
+	i = 0;
 	while(y < matrix->m_y)
 	{
 		x = 0;
@@ -268,12 +275,13 @@ void	map_display(t_matrix *matrix)
 		{
 			if (x < matrix->m_x)
 			{
-				bresenham(x, y, x + 1, y, matrix);
+				bresenham(x, y, x + 1, y, matrix, i);
 			}
 				
 			if (y < matrix->m_y - 1)
-				bresenham(x, y, x, y + 1, matrix);
+				bresenham(x, y, x, y + 1, matrix, i);
 			x++;
+			i++;
 		}
 		y++;
 	}
@@ -282,6 +290,7 @@ void	map_display(t_matrix *matrix)
 int	main(int ac,char **av)
 {
 	t_matrix	matrix;
+	
 	if (ac == 2)
 	{
 		if (gen_matrix(av[1], &matrix) != 1)

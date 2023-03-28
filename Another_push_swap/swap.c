@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:03:09 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 15:01:08 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:57:00 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 static void	swap(t_pile *pile)
 {
 	int	tmp_val;

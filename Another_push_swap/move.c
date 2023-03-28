@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:18:16 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/23 16:44:51 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:57:55 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	rb_or_rrb(t_pile **pile_b, int *cost_b)
 	}
 }
 
-void	move_pile(t_pile **pile_a, t_pile **pile_b, int	cost_a, int cost_b)
+void	move_pile(t_pile **pile_a, t_pile **pile_b, int cost_a, int cost_b)
 {
 	if (cost_a < 0 && cost_b < 0)
 		move_rrr(pile_a, pile_b, &cost_a, &cost_b);

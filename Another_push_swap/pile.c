@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pile.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 11:29:26 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 16:56:57 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:56:31 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_pile	*pile_new(int nb)
 {
 	t_pile	*new;
-	
+
 	new = malloc(sizeof * new);
 	if (!new)
 		return (NULL);
@@ -65,7 +65,7 @@ int	get_size(t_pile *pile)
 	size = 0;
 	if (!pile)
 		return (0);
-	while(pile)
+	while (pile)
 	{
 		pile = pile->next;
 		size++;

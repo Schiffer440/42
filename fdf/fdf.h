@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:46:16 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/13 14:41:04 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 09:01:53 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
 # include <stdlib.h>

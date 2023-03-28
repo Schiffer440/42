@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 10:44:24 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/22 16:39:14 by adugain          ###   ########.fr       */
+/*   Created: 2022/11/16 17:12:02 by adugain           #+#    #+#             */
+/*   Updated: 2022/12/08 17:11:25 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	print_pile(t_pile *pile)
+void	ft_putendl_fd(char *s, int fd)
 {
-	t_pile	*tmp;
+	int	i;
 
-	while (pile)
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		tmp = pile->next;
-		ft_printf("val:%d | index:%d | pos:%d | target pos:%d\n", pile->val, pile->index, pile->pos, pile->target_pos);
-		pile = tmp;
+		write (fd, &s[i], 1);
+		i++;
 	}
+	write (fd, "\n", 1);
 }

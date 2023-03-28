@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 10:05:52 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 15:02:27 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:59:07 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 static void	rotate(t_pile **pile)
 {
 	t_pile	*tmp;

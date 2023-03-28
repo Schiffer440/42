@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 13:32:36 by adugain           #+#    #+#             */
-/*   Updated: 2023/02/21 15:03:39 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 07:55:45 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 static int	get_highest_index(t_pile *pile)
 {
 	int	index;

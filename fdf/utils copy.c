@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/27 16:12:13 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:51:47 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,6 @@ int	handle_keypress(int keysym, t_matrix *matrix)
 	if (keysym == XK_Escape)
 	{	
 		mlx_destroy_window(matrix->mlx_ptr, matrix->win_ptr);
-		mlx_destroy_display(matrix->mlx_ptr);
 	}
 	/*if (keysym == XK_l)
 		draw_line(matrix);*/
@@ -232,8 +231,9 @@ int	color(int x, int y, t_matrix *matrix)
 
 void	ft_iso(float x, float y, int z)
 {
-	x = (x - y) * cos(0.8);
-	y = (x + y) * sin(0.8) - z;
+	ft_printf("------------------------------------");
+	x = (x - y) + cos(0.8) * z;
+	y = (x + y) + sin(0.8) * z;
 }
 
 void	bresenham(data data, t_matrix *matrix)
@@ -262,8 +262,8 @@ void	bresenham(data data, t_matrix *matrix)
 	x_step = x1 - x;
 	y_step = y1 - y;
 	//ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
-	//ft_iso(x, y, data.z);
-	//ft_iso(x1, y1, data.z1);
+	ft_iso(x, y, data.z);
+	ft_iso(x1, y1, data.z1);
 	x += 150;
 	y += 150;
 	x1 += 150;
@@ -328,7 +328,7 @@ int	main(int ac,char **av)
 	map_display(&matrix);
 	mlx_loop(matrix.mlx_ptr);
 	//mlx_destroy_window(matrix.mlx_ptr, matrix.win_ptr);
-	//mlx_destroy_display(matrix.mlx_ptr);
+	mlx_destroy_display(matrix.mlx_ptr);
 	free(matrix.mlx_ptr);
 	free_matrix(matrix.tab, &matrix);
 }
