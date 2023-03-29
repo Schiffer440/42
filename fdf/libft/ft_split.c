@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:18:22 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/28 13:50:46 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/29 08:06:42 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,25 @@ static void	*free_split(char **tab, int pos)
 	return (NULL);
 }
 
-int	wordcount(char *s, char c)
+static int	wordcount(char *s, char c)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (s[i] || s[i] != '\n')
+	while (s[i])
 	{
 		if (s[i] == c && s[i])
 			i++;
 		else
 		{
-			while (s[i] != c && s[i] && s[i] != '\n')
+			while (s[i] != c && s[i])
 			{
 				i++;
 			}
 		count++;
 		}
-		if (i + 1 == (int)ft_strlen(s))
-			break ;
 	}
 	return (count);
 }

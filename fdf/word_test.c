@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   word_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 09:46:16 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/29 08:31:20 by adugain          ###   ########.fr       */
+/*   Created: 2023/03/29 09:20:55 by adugain           #+#    #+#             */
+/*   Updated: 2023/03/29 10:52:15 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <stdlib.h>
-# include "minilibx/mlx.h"
-# include <X11/keysym.h>
-# include <X11/X.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdlib.h>
-# include "libft/libft.h"
+#include "fdf.h"
 
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
-# define MLX_ERROR 0
-
-typedef struct s_data
+int main()
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_data;
-
-#endif
+	int	word;
+	word = ft_wordcount("qwerty is \n\n top \n yeqh it is", "\n", " ");
+	printf("word:%d\n", word);
+}

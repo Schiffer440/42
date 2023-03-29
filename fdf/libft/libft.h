@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:28:55 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/13 16:10:36 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/29 13:07:03 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <stdbool.h>
 
 int		ft_isalpha(char c);
 int		ft_isdigit(int c);
@@ -53,7 +55,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
-int	wordcount(char *s, char c);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -62,6 +63,7 @@ char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 size_t	ft_strlen_gnl(const char *s);
 char	*ft_strchr_gnl(char *s, int c);
+int	ft_wordcount(char *s, ...);
 typedef struct s_list
 {
 	void			*content;
