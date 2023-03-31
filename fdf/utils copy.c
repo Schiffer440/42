@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/28 13:51:47 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/31 17:13:00 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ typedef	struct s_matrix
 
 typedef struct data
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 	int	z;
-	int	x1;
-	int	y1;
+	float	x1;
+	float	y1;
 	int	z1;
 	int	color;
-	float	x_step;
-	float	y_step;
 }	data;
 
 void    free_matrix(int **tab, t_matrix *matrix)
@@ -71,10 +69,10 @@ void	print_matrix(t_matrix *matrix)
 	
 	i = 0;
 	j = 0;
-	while (i < matrix->m_y)
+	while (i < matrix->m_y - 1)
 	{
 		j = 0;
-		while(j < matrix->m_x)
+		while(j < matrix->m_x - 1)
 		{
 			ft_printf("%d", matrix->tab[i][j]);
 			j++;
@@ -126,7 +124,7 @@ int	get_matrix_base(t_matrix *matrix, char *map)
 	matrix->fd = open(map, O_RDONLY);
 	line = get_next_line(matrix->fd);
 	get_wrecked(line);
-	matrix->m_x = wordcount(line, ' ');
+	matrix->m_x = ft_wordcount(line, ' ');
 	matrix->m_y += 1;
 	free(line);
 	while (line)
@@ -135,13 +133,13 @@ int	get_matrix_base(t_matrix *matrix, char *map)
 		ft_printf("line:%s", line);
 		if (line != NULL)
 			get_wrecked(line);
-		if (line != NULL && matrix->m_x == wordcount(line, ' '))
+		if (line != NULL && matrix->m_x == ft_wordcount(line, ' '))
 		{
-			ft_printf("line check:%d\nm_x:%d\n\n", wordcount(line, ' '), matrix->m_x);
+			ft_printf("line check:%d\nm_x:%d\n\n", ft_wordcount(line, ' '), matrix->m_x);
 			free(line);
 			matrix->m_y++;
 		}
-		else if ((line != NULL && matrix->m_x != wordcount(line, ' ')))
+		else if ((line != NULL && matrix->m_x != ft_wordcount(line, ' ')))
 		{
 			close(matrix->fd);
 			return(0);
@@ -156,7 +154,7 @@ void	create_matrix(t_matrix *matrix)
 	int	i;
 
 	i = 0;
-	matrix->tab = malloc(sizeof(int*) * matrix->m_y);
+	matrix->tab = malloc(sizeof(int *) * matrix->m_y);
 	while (i < matrix->m_y)
 	{
 		ft_printf("creating...\n");
@@ -175,20 +173,7 @@ int	gen_matrix(char *map, t_matrix *matrix)
 	create_matrix(matrix);
 	fill_matrix(matrix, map);
 	print_matrix(matrix);
-	//free_matrix(matrix->tab, matrix);
 	return (1);
-	//ft_printf("m_y:%d\nm_x:%d", matrix.m_y, matrix.m_x);
-}
-
-int	handle_no_event(void *matrix)
-{
-	return(0);
-}
-
-int	handle_keyrelease(int keysym, t_matrix *matrix)
-{
-	printf("Keypress: %d\n", keysym);
-	return (0);
 }
 
 int	handle_keypress(int keysym, t_matrix *matrix)
@@ -197,8 +182,6 @@ int	handle_keypress(int keysym, t_matrix *matrix)
 	{	
 		mlx_destroy_window(matrix->mlx_ptr, matrix->win_ptr);
 	}
-	/*if (keysym == XK_l)
-		draw_line(matrix);*/
 	return (0);
 }
 
@@ -229,53 +212,47 @@ int	color(int x, int y, t_matrix *matrix)
 		return (0xffffff);
 }
 
-void	ft_iso(float x, float y, int z)
+void	ft_iso(float *x, float *y, int z)
 {
 	ft_printf("------------------------------------");
-	x = (x - y) + cos(0.8) * z;
-	y = (x + y) + sin(0.8) * z;
+	*x = (*x - *y) * cos(1);
+	*y = (*x + *y) * sin(1) - z;
 }
 
 void	bresenham(data data, t_matrix *matrix)
 {
-	float	x;
-	float	y;
-	float	x1;
-	float	y1;
 	float	x_step;
 	float	y_step;
 	int	max;
 	
-	x = data.x;
-	y = data.y;
-	x1 = data.x1;
-	y1 = data.y1;
 	data.color = color(data.x, data.y, matrix);
 	data.z = matrix->tab[(int)data.y][(int)data.x];
 	ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
 	data.z1 = matrix->tab[(int)data.y1][(int)data.x1];
-	x *= matrix->zoom;
-	y *= matrix->zoom;
-	x1 *= matrix->zoom;
-	y1 *= matrix->zoom;
+	data.x *= matrix->zoom;
+	data.y *= matrix->zoom;
+	data.x1 *= matrix->zoom;
+	data.y1 *= matrix->zoom;
+
+	ft_iso(&data.x, &data.y, data.z);
+	ft_iso(&data.x1, &data.y1, data.z1);
+	data.x += 250;
+	data.y += 250;
+	data.x1 += 250;
+	data.y1 += 250;
+
 	
-	x_step = x1 - x;
-	y_step = y1 - y;
-	//ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
-	ft_iso(x, y, data.z);
-	ft_iso(x1, y1, data.z1);
-	x += 150;
-	y += 150;
-	x1 += 150;
-	y1 += 150;
+	ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
+	x_step = data.x1 - data.x;
+	y_step = data.y1 - data.y;
 	max = max_op(abs_f(x_step), abs_f(y_step));
 	x_step /= max;
 	y_step /= max;
-	while((int)(x - x1) || (int)(y - y1))
+	while((int)(data.x - data.x1) || (int)(data.y - data.y1))
 	{
-		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, x, y, data.color);
-		x += x_step; 
-		y += y_step;
+		mlx_pixel_put(matrix->mlx_ptr, matrix->win_ptr, data.x, data.y, data.color);
+		data.x += x_step; 
+		data.y += y_step;
 	}
 }
 
@@ -284,13 +261,13 @@ void	map_display(t_matrix *matrix)
 	data data;
 
 	data.y = 0;
-	while((int)data.y < matrix->m_y)
+	while(data.y < matrix->m_y)
 	{
 		data.x = 0;
-		while (data.x <= matrix->m_x)
+		while (data.x < matrix->m_x)
 		{
 			//ft_printf("x->%d\n", data.x);
-			if (data.x < matrix->m_x)
+			if (data.x < matrix->m_x - 1)
 			{
 				data.x1 = data.x + 1;
 				data.y1 = data.y;
@@ -303,15 +280,16 @@ void	map_display(t_matrix *matrix)
 				data.y1 = data.y + 1;
 				bresenham(data, matrix);
 			}
-			data.x += 1;
+			data.x++;
 		}
-		data.y += 1;
+		data.y++;
 	}
 }
 
 int	main(int ac,char **av)
 {
 	t_matrix	matrix;
+	
 	if (ac == 2)
 	{
 		if (gen_matrix(av[1], &matrix) != 1)
@@ -322,12 +300,10 @@ int	main(int ac,char **av)
 	matrix.zoom = 20;
 	matrix.mlx_ptr = mlx_init();
 	matrix.win_ptr = mlx_new_window(matrix.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
-	mlx_loop_hook(matrix.mlx_ptr, &handle_no_event, &matrix);
+	mlx_loop_hook(matrix.mlx_ptr, &handle_keypress, &matrix);
 	mlx_hook(matrix.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &matrix);
-	mlx_hook(matrix.win_ptr, KeyRelease, KeyReleaseMask, &handle_keyrelease, &matrix);
 	map_display(&matrix);
 	mlx_loop(matrix.mlx_ptr);
-	//mlx_destroy_window(matrix.mlx_ptr, matrix.win_ptr);
 	mlx_destroy_display(matrix.mlx_ptr);
 	free(matrix.mlx_ptr);
 	free_matrix(matrix.tab, &matrix);

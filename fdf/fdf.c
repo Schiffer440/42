@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:01:36 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/29 15:28:11 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/31 13:56:54 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,33 @@ typedef struct s_coord
 
 typedef	struct s_matrix
 {
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_coord	*coord;
 	char	*str;
 	int	m_x;
 	int	m_y;
 	int	**tab;
-	
+
 }	t_matrix;
 
-int	handle_keypress(int keysym, t_data *data)
+void    free_matrix(int **tab, t_matrix *matrix)
+{
+    int    i;
+
+    i = 0;
+    while (i < matrix->m_y)
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
+}
+
+int	handle_keypress(int keysym, t_matrix *matrix)
 {
 	if (keysym == XK_Escape)
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_window(matrix->mlx_ptr, matrix->win_ptr);
 	return (0);
 }
 
@@ -92,36 +107,66 @@ void	read_map(t_matrix *matrix, char *map)
 		else if (matrix->m_x != parse_map(line))
 			return ;
 		if (first_line == false)
-			matrix->str = ft_strjoin(matrix->str, line);
+			matrix->str = ft_strjoin_gnl(matrix->str, line);
 		matrix->m_y++;
 		first_line = false;
+		free(line);
 	}
 	close(fd);
 }
 
+bool	init(t_matrix *matrix)
+{
+	matrix->mlx_ptr = mlx_init();
+	if (matrix->mlx_ptr == NULL)
+		return(false);
+	matrix->win_ptr = mlx_new_window(matrix->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
+	if (matrix->win_ptr == NULL)
+		return (false);
+	ft_printf("-------------\n");
+	matrix->str = NULL;
+	matrix->m_x = 0; 
+	matrix->m_y = 0;
+	return (true);
+}
+
+void	fill_tab(t_matrix * matrix)
+{
+	int	i;
+
+	i = 0;
+	matrix->tab = malloc(sizeof(int *) * matrix->m_y);
+	while (i < matrix->m_y)
+	{
+		matrix->tab[i]= malloc(sizeof(int) * matrix->m_x);
+		i++;
+	}
+	
+	free(matrix->str);
+}
+
+void	fdf(t_matrix *matrix)
+{
+	fill_tab(matrix);
+}
+
 int	main(int ac, char **av)
 {
-	t_data	data;
 	t_matrix	matrix;
 	
-	if (ac == 2)
-		read_map(&matrix, av[1]);
-	else
+	if (ac != 2)
 		return (0);
+	if (init(&matrix) == false)
+		return (0);
+	ft_printf("-------------\n");
+	read_map(&matrix, av[1]);
+	fdf(&matrix);
 	ft_printf("x:%d\ny:%d\n%s", matrix.m_x, matrix.m_y, matrix.str);
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return(MLX_ERROR);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "My first wind");
-	if (data.win_ptr == NULL)
-	{
-		free(data.win_ptr);
-		return (MLX_ERROR);
-	}
-	mlx_loop_hook(data.mlx_ptr, &handle_keypress, &data);
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &data);
-	mlx_loop(data.mlx_ptr);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	mlx_loop_hook(matrix.mlx_ptr, &handle_keypress, &matrix);
+	mlx_hook(matrix.win_ptr, KeyPress, KeyPressMask, &handle_keypress, &matrix);
+	mlx_loop(matrix.mlx_ptr);
+	mlx_destroy_display(matrix.mlx_ptr);
+	free(matrix.mlx_ptr);
+	free_matrix(matrix.tab, &matrix);
 	return (0);
 }

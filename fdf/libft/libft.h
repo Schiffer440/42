@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:28:55 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/29 13:07:03 by adugain          ###   ########.fr       */
+/*   Updated: 2023/03/31 14:09:47 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_next_line(int fd);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 size_t	ft_strlen_gnl(const char *s);
 char	*ft_strchr_gnl(char *s, int c);
-int	ft_wordcount(char *s, ...);
+int	ft_wordcount(char *s, char c);
 typedef struct s_list
 {
 	void			*content;
