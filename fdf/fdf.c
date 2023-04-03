@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:01:36 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/31 13:56:54 by adugain          ###   ########.fr       */
+/*   Updated: 2023/04/03 10:46:05 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ bool	init(t_matrix *matrix)
 	return (true);
 }
 
-void	fill_tab(t_matrix * matrix)
+void	fill_tab(t_matrix *matrix)
 {
 	int	i;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils copy.c                                       :+:      :+:    :+:   */
+/*   n_fdf.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adugain <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 18:18:43 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/31 17:13:00 by adugain          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:18:52 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,13 +200,9 @@ float	abs_f(float nb)
 	return (nb);
 }
 
-int	color(int x, int y, t_matrix *matrix)
+int	color(data *data)
 {
-	int	z;
-	int	z1;
-
-	z = matrix->tab[y][x];
-	if (z != 0)
+	if (data->z != 0 || data->z1 != 0)
 		return (0xe80c0c);
 	else
 		return (0xffffff);
@@ -225,8 +221,9 @@ void	bresenham(data data, t_matrix *matrix)
 	float	y_step;
 	int	max;
 	
-	data.color = color(data.x, data.y, matrix);
 	data.z = matrix->tab[(int)data.y][(int)data.x];
+	data.z1 = matrix->tab[(int)data.y1][(int)data.x1];
+	data.color = color(&data);
 	ft_printf("x:%d y:%d z:%d\n", data.x, data.y, data.z );
 	data.z1 = matrix->tab[(int)data.y1][(int)data.x1];
 	data.x *= matrix->zoom;

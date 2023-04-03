@@ -6,7 +6,7 @@
 /*   By: adugain <adugain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:46:16 by adugain           #+#    #+#             */
-/*   Updated: 2023/03/29 08:31:20 by adugain          ###   ########.fr       */
+/*   Updated: 2023/04/03 11:15:25 by adugain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,5 @@
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 1000
 # define MLX_ERROR 0
-
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_data;
 
 #endif
